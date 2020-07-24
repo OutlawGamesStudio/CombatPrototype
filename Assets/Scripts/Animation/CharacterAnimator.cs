@@ -7,9 +7,9 @@ public class CharacterAnimator : AnimationScript
     public float PauseMovement { get; private set; }
     public Vector2 CharacterMovementVelocity { get; protected set; } = new Vector2();
 
-    [SerializeField] private Animation[] m_FastAttacks;
-    [SerializeField] private Animation[] m_StrongAttacks;
-    [SerializeField] private Animation[] m_DodgeAttacks;
+    [SerializeField] private Animation[] m_FastAttacks = null;
+    [SerializeField] private Animation[] m_StrongAttacks = null;
+    [SerializeField] private Animation[] m_DodgeAttacks = null;
 
     protected override void Start()
     {

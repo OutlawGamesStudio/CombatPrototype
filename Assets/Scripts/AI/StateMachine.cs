@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent), typeof(NPC))]
 public class StateMachine : MonoBehaviour
 {
-    [SerializeField] private AiState m_StartingState;
+    [SerializeField] private AiState m_StartingState = null;
     [SerializeField] private AiState m_CurrentState;
     [SerializeField] private AiState m_LastState;
     public NavMeshAgent NavMeshAgent { get; private set; }

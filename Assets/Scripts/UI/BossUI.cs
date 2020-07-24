@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class BossUI : Singleton<BossUI>
 {
-    [SerializeField] private GameObject m_BossUI;
-    [SerializeField] private Scrollbar m_BossHealth;
-    [SerializeField] private TextMeshProUGUI m_BossName;
+    [SerializeField] private GameObject m_BossUI = null;
+    [SerializeField] private Scrollbar m_BossHealth = null;
+    [SerializeField] private TextMeshProUGUI m_BossName = null;
     private NPC m_BossNPC;
 
     public void AssignBoss(NPC bossNPC)
