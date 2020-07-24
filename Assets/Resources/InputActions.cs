@@ -56,7 +56,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""id"": ""e4466319-75ea-46c4-86f4-d7dadce8b9de"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Cast Spell"",

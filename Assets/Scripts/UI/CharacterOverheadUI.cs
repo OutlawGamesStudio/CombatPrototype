@@ -7,9 +7,10 @@ public class CharacterOverheadUI : MonoBehaviour
     private Quaternion m_OrigRotation;
     private Camera m_MainCamera;
     private GameObject m_OverheadUI;
-    [SerializeField] private Scrollbar m_HealthBar;
-    [SerializeField] private TextMeshProUGUI m_CharacterName;
+    private Scrollbar m_HealthBar;
+    private TextMeshProUGUI m_CharacterName;
     private NPC m_NPC;
+    private Player m_Player;
 
     // Start is called before the first frame update
     private void Start()
@@ -20,6 +21,7 @@ public class CharacterOverheadUI : MonoBehaviour
         m_CharacterName = m_OverheadUI.GetComponentInChildren<TextMeshProUGUI>();
         m_OrigRotation = transform.rotation;
         m_MainCamera = Camera.main;
+        m_Player = Player.Instance;
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class CharacterOverheadUI : MonoBehaviour
 
     private void EnableHealthIfAble()
     {
-        if (m_NPC.CharacterStats.CurrentHealth <= 0)
+        if (m_NPC.CharacterStats.CurrentHealth <= 0 || Vector3.Distance(m_Player.transform.position, transform.position) > 10f)
         {
             m_OverheadUI.SetActive(false);
         }

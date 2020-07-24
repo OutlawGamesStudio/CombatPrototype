@@ -9,8 +9,7 @@ public class MeleeWeapon : MonoBehaviour
     private BoxCollider m_BoxCollider;
     private AudioClip BluntClip;
     private AudioClip HitClip;
-    private AudioClip MissClip;
-    AudioSource AudioSource;
+    private AudioSource AudioSource;
 
     private void Start()
     {
@@ -18,10 +17,8 @@ public class MeleeWeapon : MonoBehaviour
         m_BoxCollider.isTrigger = true;
         BluntClip = Resources.Load<AudioClip>("Audio/SFX/Bloody Punch");
         HitClip = Resources.Load<AudioClip>("Audio/SFX/Hit Body 1");
-        MissClip = Resources.Load<AudioClip>("Audio/SFX/Miss Body");
         AudioSource = gameObject.AddComponent<AudioSource>();
         AudioSource.loop = false;
-        AudioSource.clip = MissClip;
     }
 
     private void OnTriggerEnter(Collider other)

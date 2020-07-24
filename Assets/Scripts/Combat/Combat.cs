@@ -2,12 +2,20 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum WeaponType
+{
+    Fists,
+    Sword,
+    Bow,
+    Spear
+};
+
 public enum AttackType
 {
     None,
     Dodge,
-    SwordFast,
-    SwordStrong
+    Fast,
+    Strong
 };
 
 public class Combat : AnimationScript
@@ -18,6 +26,7 @@ public class Combat : AnimationScript
 
     [SerializeField] private AttackType m_AttackType = AttackType.None;
     [SerializeField] private float m_HoldTime = 0f;
+    private float m_BlockTime = 0f;
     private InputHandler m_InputHandler;
     private float m_StrongAttackBeingPerformed;
     private NPC m_LockOnTarget;
@@ -25,6 +34,10 @@ public class Combat : AnimationScript
     private AudioSource m_AudioSource;
     private AudioClip Unsheath;
     private AudioClip Sheath;
+    [SerializeField] private AudioSource SwingAudioSource;
+    [SerializeField] private float audioDelay = 0.1f;
+    [SerializeField] private WeaponType m_WeaponType;
+    private float m_BlockedRecently;
 
     public bool WeaponSheathed { get; private set; }
 
@@ -46,6 +59,7 @@ public class Combat : AnimationScript
         m_AudioSource.loop = false;
         Unsheath = Resources.Load<AudioClip>("Audio/SFX/Unsheath");
         Sheath = Resources.Load<AudioClip>("Audio/SFX/Sheath");
+        m_BlockedRecently = 0;
     }
 
     private void ResetTime()
@@ -63,6 +77,8 @@ public class Combat : AnimationScript
             HandleDodge();
             HandleFastAttack();
             HandleStrongAttack();
+            HandleBlock();
+            HandleBowFire();
         }
         if(m_StrongAttackBeingPerformed > 0)
         {
@@ -71,6 +87,53 @@ public class Combat : AnimationScript
         if(m_LockOnPerformed > 0)
         {
             m_LockOnPerformed -= Time.deltaTime;
+        }
+        if(m_BlockedRecently > 0)
+        {
+            m_BlockedRecently -= Time.deltaTime;
+        }
+    }
+
+    private void HandleBlock()
+    {
+        if (m_WeaponType != WeaponType.Sword)
+        {
+            return;
+        }
+        if (m_InputHandler.GetShieldDown() && m_BlockTime <= 0)
+        {
+            m_Animator.SetBool("Blocking", true);
+            m_Animator.CrossFade($"Sword Block", 0.1f);
+            m_BlockTime += Time.deltaTime;
+            Debug.Log("Blocking " + m_BlockTime);
+        }
+        if (m_InputHandler.GetShieldUp())
+        {
+            Debug.Log("Not Blocking " + m_BlockTime);    
+            m_Animator.SetBool("Blocking", false);
+            m_BlockTime = 0;
+            m_BlockedRecently = 1f;
+        }
+    }
+
+    private void HandleBowFire()
+    {
+        if(m_WeaponType != WeaponType.Bow)
+        {
+            return;
+        }
+        if (m_InputHandler.GetAttackDown() && m_HoldTime <= 0)
+        {
+            MeleeWeapon.AttackAllowed = true;
+            m_AttackType = AttackType.Fast;
+            m_Animator.SetBool("BowFire", false);
+            m_Animator.CrossFade($"Bow Draw", 0.1f);
+            m_HoldTime += m_InputHandler.GetAttackHoldTime();
+        }
+        if (m_InputHandler.GetAttackUp())
+        {
+            m_Animator.SetBool("BowFire", true);
+            ResetTime();
         }
     }
 
@@ -134,12 +197,10 @@ public class Combat : AnimationScript
             {
                 if(closestNPC.CharacterStats.IsBoss)
                 {
-                    EnemyUI.Instance.AssignEnemy(null);
                     BossUI.Instance.AssignBoss(closestNPC);
                 }
                 else
                 {
-                    EnemyUI.Instance.AssignEnemy(closestNPC);
                     BossUI.Instance.AssignBoss(null);
                 }
                 CameraController.Instance.LockOn(closestNPC);
@@ -155,7 +216,6 @@ public class Combat : AnimationScript
     {
         CameraController.Instance.LockOff();
         BossUI.Instance.AssignBoss(null);
-        EnemyUI.Instance.AssignEnemy(null);
     }
 
     private void HandleDodge()
@@ -171,23 +231,31 @@ public class Combat : AnimationScript
 
     private void HandleFastAttack()
     {
-        if (m_InputHandler.GetAttackDown())
+        if (m_WeaponType != WeaponType.Sword && m_WeaponType != WeaponType.Spear)
+        {
+            return;
+        }
+        if (m_InputHandler.GetAttackDown() && m_InputHandler.GetShieldUp())
         {
             m_HoldTime += m_InputHandler.GetAttackHoldTime();
         }
         if (m_InputHandler.GetAttackUp() && m_HoldTime > 0 && m_HoldTime < MIN_HOLD_TIME)
         {
             int index = Convert.ToInt32(Random.value > 0.5f)+1;
-            Debug.Log($"Random: {index}");
             ResetTime();
             MeleeWeapon.AttackAllowed = true;
-            m_AttackType = AttackType.SwordFast;
+            m_AttackType = AttackType.Fast;
             m_Animator.CrossFade($"Fast Attack " + index, 0.1f);
+            SwingAudioSource.PlayDelayed(audioDelay);
         }
     }
 
     private void HandleStrongAttack()
     {
+        if (m_WeaponType != WeaponType.Sword || m_WeaponType != WeaponType.Spear)
+        {
+            return;
+        }
         if (m_StrongAttackBeingPerformed > 0)
         {
             return;
@@ -202,9 +270,10 @@ public class Combat : AnimationScript
             PlayerMovement.PauseControls(1);
             ResetTime();
             MeleeWeapon.AttackAllowed = true;
-            m_AttackType = AttackType.SwordStrong;
+            m_AttackType = AttackType.Strong;
             m_Animator.CrossFade($"Strong Attack", 0.1f);
             m_StrongAttackBeingPerformed = 0.5f;
+            SwingAudioSource.PlayDelayed(audioDelay);
         }
     }
 

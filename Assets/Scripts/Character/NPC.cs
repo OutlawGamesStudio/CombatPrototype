@@ -42,11 +42,9 @@ public class NPC : MonoBehaviour
 
     public void OnWeaponDamage(float damage)
     {
-        Debug.Log($"NPC {name} has been attacked with a damage modifier of {damage}");
         CharacterStats.CurrentHealth -= damage;
         if(CharacterStats.CurrentHealth <= 0)
         {
-            Debug.Log($"NPC {name} is now dead.");
             CharacterStats.IsDead = true;
             NPCAnimator.DeathAnimation();
         }

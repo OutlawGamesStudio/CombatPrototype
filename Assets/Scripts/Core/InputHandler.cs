@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public enum AxisName
@@ -29,7 +28,8 @@ public class InputHandler : Singleton<InputHandler>
 
     // Private Variables
     private Vector2 m_MouseScrollInternal;
-    private float m_HoldTime;
+    private float m_AttackHold;
+    public float m_ShieldHold;
 
     private void OnEnable()
     {
@@ -41,8 +41,10 @@ public class InputHandler : Singleton<InputHandler>
             InputActions.Movement.CameraScroll.performed += camScroll => m_MouseScrollInternal = camScroll.ReadValue<Vector2>();
             InputActions.Movement.Running.performed += runPerform => IsRunning = true;
             InputActions.Movement.Running.canceled += runCancel => IsRunning = false;
-            InputActions.Attack.FastAttack.started += _ => { m_HoldTime += Time.deltaTime; Debug.Log($"Fast attack performed {m_HoldTime}"); };
-            InputActions.Attack.FastAttack.canceled += _ => { m_HoldTime = 0; Debug.Log("Fast attack canceled"); };
+            InputActions.Attack.FastAttack.started += _ => { m_AttackHold += Time.deltaTime; };
+            InputActions.Attack.FastAttack.canceled += _ => { m_AttackHold = 0; };
+            InputActions.Attack.Shield.started += _ => { m_ShieldHold += Time.deltaTime; };
+            InputActions.Attack.Shield.canceled += _ => { m_ShieldHold = 0; };
         }
         InputActions.Enable();
     }
@@ -70,31 +72,40 @@ public class InputHandler : Singleton<InputHandler>
 
     public bool GetSheath()
     {
-        Debug.Log($"GetSheath: {InputActions.Attack.Sheath.ReadValue<float>() > 0}");
         return InputActions.Attack.Sheath.ReadValue<float>() > 0;
     }
 
     public bool GetAttackDown()
     {
-        return m_HoldTime > 0;
+        return m_AttackHold > 0;
     }
 
-    public float GetAttackHoldTime() => m_HoldTime;
+    public float GetAttackHoldTime() => m_AttackHold;
 
     public bool GetAttackUp()
     {
-        return m_HoldTime == 0;
+        return m_AttackHold == 0;
+    }
+
+    public bool GetShieldDown()
+    {
+        return m_ShieldHold > 0;
+    }
+
+    public float GetShieldHoldTime() => m_ShieldHold;
+
+    public bool GetShieldUp()
+    {
+        return m_ShieldHold == 0;
     }
 
     public bool GetDodge()
     {
-        Debug.Log($"InputActions.Attack.Dodge: {InputActions.Attack.Dodge.ReadValue<float>() > 0}");
         return InputActions.Attack.Dodge.ReadValue<float>() > 0;
     }
 
     public bool GetLockOn()
     {
-        Debug.Log($"LockOn: {InputActions.Attack.LockOn.ReadValue<float>() > 0}");
         return InputActions.Attack.LockOn.ReadValue<float>() > 0;
     }
 }
