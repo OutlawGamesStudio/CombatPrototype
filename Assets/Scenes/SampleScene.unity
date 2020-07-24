@@ -3448,7 +3448,7 @@ MonoBehaviour:
   m_HoldTime: 0
   SwingAudioSource: {fileID: 1345399476}
   audioDelay: 0.1
-  m_WeaponType: 2
+  m_WeaponType: 1
 --- !u!1 &941151835
 GameObject:
   m_ObjectHideFlags: 0
