@@ -3,6 +3,7 @@
 [RequireComponent(typeof(NPCAnimator), typeof(StateMachine))]
 public class NPC : MonoBehaviour
 {
+    private const float BASE_HEALTH = 100f;
     [SerializeField] private StateMachine m_StateMachine;
     public StateMachine StateMachine => m_StateMachine;
 
@@ -20,11 +21,11 @@ public class NPC : MonoBehaviour
         }
         if(CharacterStats.IsBoss)
         {
-            CharacterStats.MaxHealth = 200 * CharacterStats.Level;
+            CharacterStats.MaxHealth = (BASE_HEALTH * 2.0f) * CharacterStats.Level;
         }
         else
         {
-            CharacterStats.MaxHealth = 100 * CharacterStats.Level;
+            CharacterStats.MaxHealth = (BASE_HEALTH * 1.25f) * CharacterStats.Level;
         }
         CharacterStats.CurrentHealth = CharacterStats.MaxHealth;
     }
