@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(NPCAnimator), typeof(StateMachine))]
 public class NPC : MonoBehaviour
@@ -15,6 +14,19 @@ public class NPC : MonoBehaviour
     {
         m_StateMachine = GetComponent<StateMachine>();
         NPCAnimator = GetComponent<NPCAnimator>();
+        if(CharacterStats.Level < 1)
+        {
+            CharacterStats.Level = 1;
+        }
+        if(CharacterStats.IsBoss)
+        {
+            CharacterStats.MaxHealth = 200 * CharacterStats.Level;
+        }
+        else
+        {
+            CharacterStats.MaxHealth = 100 * CharacterStats.Level;
+        }
+        CharacterStats.CurrentHealth = CharacterStats.MaxHealth;
     }
 
     private void Update()
@@ -24,6 +36,18 @@ public class NPC : MonoBehaviour
         if(Vector3.Distance(transform.position, Player.Instance.transform.position) <= 10f)
         {
 
+        }
+    }
+
+    public void OnWeaponDamage(float damage)
+    {
+        Debug.Log($"NPC {name} has been attacked with a damage modifier of {damage}");
+        CharacterStats.CurrentHealth -= damage;
+        if(CharacterStats.CurrentHealth <= 0)
+        {
+            Debug.Log($"NPC {name} is now dead.");
+            CharacterStats.IsDead = true;
+            NPCAnimator.DeathAnimation();
         }
     }
 }

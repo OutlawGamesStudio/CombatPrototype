@@ -9,6 +9,7 @@ public class PlayerMovement : CharacterAnimator
     [SerializeField] private bool m_IsRunning = false;
     [SerializeField] private float m_Limit = MOVE_LIMIT/2;
     private InputHandler m_InputHandler;
+    public bool InCombat;
 
     private void Awake()
     {
@@ -28,8 +29,8 @@ public class PlayerMovement : CharacterAnimator
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
         HandleInput();
+        base.Update();
     }
 
     private void HandleInput()
@@ -82,6 +83,7 @@ public class PlayerMovement : CharacterAnimator
 
     protected override void UpdateMovement()
     {
+        m_Animator.SetBool("InCombat", Player.Instance.CharacterStats.InCombat);
         if (CharacterMovementVelocity.x != 0.0f || CharacterMovementVelocity.y != 0.0f)
         {
             var camRot = CameraController.Instance.transform.eulerAngles.y;

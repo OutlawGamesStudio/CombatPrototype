@@ -24,7 +24,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""id"": ""3fe5394f-2b33-495e-9b29-e6353ca487f6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Fast Attack"",
@@ -32,7 +32,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""id"": ""83dad013-32c0-4bb2-b29f-cb956a8e9b79"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=1)""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Dodge"",
@@ -73,6 +73,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Sheath"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c864bf8-b5de-4f14-a2fc-288d34868658"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -90,7 +98,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ff5af0d9-9881-4348-8043-549cd0ea361f"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -229,6 +237,28 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""action"": ""Lock On"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70076e72-fc1d-4e93-bac0-bc1dde5985e3"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sheath"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a919e0c-5269-48a0-af77-88a7a7ea6945"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sheath"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -327,8 +357,19 @@ public class @InputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""002fdc40-2772-4663-a261-0282ebc5862b"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ed9b254a-1d4d-4c82-8659-66f52de13561"",
-                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": ""AxisDeadzone"",
                     ""groups"": """",
@@ -672,6 +713,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_Attack_Shield = m_Attack.FindAction("Shield", throwIfNotFound: true);
         m_Attack_CastSpell = m_Attack.FindAction("Cast Spell", throwIfNotFound: true);
         m_Attack_LockOn = m_Attack.FindAction("Lock On", throwIfNotFound: true);
+        m_Attack_Sheath = m_Attack.FindAction("Sheath", throwIfNotFound: true);
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Movement = m_Movement.FindAction("Movement", throwIfNotFound: true);
@@ -745,6 +787,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Attack_Shield;
     private readonly InputAction m_Attack_CastSpell;
     private readonly InputAction m_Attack_LockOn;
+    private readonly InputAction m_Attack_Sheath;
     public struct AttackActions
     {
         private @InputActions m_Wrapper;
@@ -756,6 +799,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @Shield => m_Wrapper.m_Attack_Shield;
         public InputAction @CastSpell => m_Wrapper.m_Attack_CastSpell;
         public InputAction @LockOn => m_Wrapper.m_Attack_LockOn;
+        public InputAction @Sheath => m_Wrapper.m_Attack_Sheath;
         public InputActionMap Get() { return m_Wrapper.m_Attack; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -786,6 +830,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @LockOn.started -= m_Wrapper.m_AttackActionsCallbackInterface.OnLockOn;
                 @LockOn.performed -= m_Wrapper.m_AttackActionsCallbackInterface.OnLockOn;
                 @LockOn.canceled -= m_Wrapper.m_AttackActionsCallbackInterface.OnLockOn;
+                @Sheath.started -= m_Wrapper.m_AttackActionsCallbackInterface.OnSheath;
+                @Sheath.performed -= m_Wrapper.m_AttackActionsCallbackInterface.OnSheath;
+                @Sheath.canceled -= m_Wrapper.m_AttackActionsCallbackInterface.OnSheath;
             }
             m_Wrapper.m_AttackActionsCallbackInterface = instance;
             if (instance != null)
@@ -811,6 +858,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @LockOn.started += instance.OnLockOn;
                 @LockOn.performed += instance.OnLockOn;
                 @LockOn.canceled += instance.OnLockOn;
+                @Sheath.started += instance.OnSheath;
+                @Sheath.performed += instance.OnSheath;
+                @Sheath.canceled += instance.OnSheath;
             }
         }
     }
@@ -978,6 +1028,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnShield(InputAction.CallbackContext context);
         void OnCastSpell(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
+        void OnSheath(InputAction.CallbackContext context);
     }
     public interface IMovementActions
     {

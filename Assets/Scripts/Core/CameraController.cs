@@ -62,4 +62,14 @@ public class CameraController : Singleton<CameraController>
         mouseY = m_InputHandler.MouseY;
         mouseScroll = m_InputHandler.MouseScroll;
     }
+
+    public void LockOn(NPC npc)
+    {
+        m_LockOnTarget = npc;
+    }
+
+    public void LockOff()
+    {
+        m_LockOnTarget = null;
+    }
 }

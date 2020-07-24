@@ -68,9 +68,14 @@ public class InputHandler : Singleton<InputHandler>
         MouseScroll = m_MouseScrollInternal.y * 20 * deltaTime;
     }
 
+    public bool GetSheath()
+    {
+        Debug.Log($"GetSheath: {InputActions.Attack.Sheath.ReadValue<float>() > 0}");
+        return InputActions.Attack.Sheath.ReadValue<float>() > 0;
+    }
+
     public bool GetAttackDown()
     {
-        Debug.Log($"GetAttackDown: {m_HoldTime > 0}");
         return m_HoldTime > 0;
     }
 
@@ -78,14 +83,7 @@ public class InputHandler : Singleton<InputHandler>
 
     public bool GetAttackUp()
     {
-        Debug.Log($"GetAttackUp: {m_HoldTime == 0}");
         return m_HoldTime == 0;
-    }
-
-    public bool GetStrongAttack()
-    {
-        //Debug.Log($"InputActions.Attack.StrongAttack: {InputActions.Attack.StrongAttack.ReadValue<float>() > 0}");
-        return InputActions.Attack.StrongAttack.ReadValue<float>() > 0;
     }
 
     public bool GetDodge()
@@ -94,9 +92,9 @@ public class InputHandler : Singleton<InputHandler>
         return InputActions.Attack.Dodge.ReadValue<float>() > 0;
     }
 
-    public bool GetShield()
+    public bool GetLockOn()
     {
-        Debug.Log($"InputActions.Attack.StrongAttack: {InputActions.Attack.Shield.ReadValue<float>() > 0}");
-        return InputActions.Attack.Shield.ReadValue<float>() > 0;
+        Debug.Log($"LockOn: {InputActions.Attack.LockOn.ReadValue<float>() > 0}");
+        return InputActions.Attack.LockOn.ReadValue<float>() > 0;
     }
 }

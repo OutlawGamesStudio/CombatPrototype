@@ -14,4 +14,9 @@ public class NPCAnimator : CharacterAnimator
     {
         base.Update();
     }
+
+    public void DeathAnimation()
+    {
+        m_Animator.CrossFade("Death", 0.1f);
+    }
 }

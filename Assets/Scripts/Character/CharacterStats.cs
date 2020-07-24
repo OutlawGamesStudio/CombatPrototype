@@ -13,8 +13,12 @@ public class CharacterStats
 {
     public string Name;
     public bool IsDead;
+    public int Level;
+    public float MaxHealth;
+    public float CurrentHealth;
     public Vector3 Position = new Vector3();
     public Quaternion Rotation = new Quaternion();
     public bool IsBoss;
     public CharacterType CharacterType;
+    public bool InCombat;
 }

@@ -11,7 +11,7 @@
                     "id": "3fe5394f-2b33-495e-9b29-e6353ca487f6",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 },
                 {
                     "name": "Fast Attack",
@@ -19,7 +19,7 @@
                     "id": "83dad013-32c0-4bb2-b29f-cb956a8e9b79",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=1)"
+                    "interactions": ""
                 },
                 {
                     "name": "Dodge",
@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Sheath",
+                    "type": "Button",
+                    "id": "2c864bf8-b5de-4f14-a2fc-288d34868658",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -77,7 +85,7 @@
                 {
                     "name": "",
                     "id": "ff5af0d9-9881-4348-8043-549cd0ea361f",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -216,6 +224,28 @@
                     "action": "Lock On",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70076e72-fc1d-4e93-bac0-bc1dde5985e3",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sheath",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a919e0c-5269-48a0-af77-88a7a7ea6945",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sheath",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -314,8 +344,19 @@
                 },
                 {
                     "name": "",
+                    "id": "002fdc40-2772-4663-a261-0282ebc5862b",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ed9b254a-1d4d-4c82-8659-66f52de13561",
-                    "path": "<Gamepad>/rightStick/down",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "AxisDeadzone",
                     "groups": "",

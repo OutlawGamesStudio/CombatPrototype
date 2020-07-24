@@ -38,7 +38,10 @@ public class StateMachine : MonoBehaviour
         {
             // Do not update if dead.
             Stop();
-            m_CurrentState.ExitState();
+            if(m_CurrentState != null)
+            {
+                m_CurrentState.ExitState();
+            }
             m_CurrentState = null;
             return;
         }
