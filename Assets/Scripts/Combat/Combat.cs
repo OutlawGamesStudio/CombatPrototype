@@ -37,7 +37,7 @@ public class Combat : AnimationScript
     [SerializeField] private AudioSource SwingAudioSource;
     [SerializeField] private float audioDelay = 0.1f;
     [SerializeField] private WeaponType m_WeaponType;
-    private float m_BlockedRecently;
+    [SerializeField] private float m_BlockedRecently;
 
     public bool WeaponSheathed { get; private set; }
 
@@ -109,10 +109,8 @@ public class Combat : AnimationScript
         }
         if (m_InputHandler.GetShieldUp())
         {
-            Debug.Log("Not Blocking " + m_BlockTime);    
             m_Animator.SetBool("Blocking", false);
             m_BlockTime = 0;
-            m_BlockedRecently = 1f;
         }
     }
 
@@ -235,9 +233,14 @@ public class Combat : AnimationScript
         {
             return;
         }
-        if (m_InputHandler.GetAttackDown() && m_InputHandler.GetShieldUp())
+        if(m_BlockedRecently > 0f)
         {
-            m_HoldTime += m_InputHandler.GetAttackHoldTime();
+            return;
+        }
+
+        if (m_InputHandler.GetAttackDown())
+        {
+            m_HoldTime += Time.deltaTime;
         }
         if (m_InputHandler.GetAttackUp() && m_HoldTime > 0 && m_HoldTime < MIN_HOLD_TIME)
         {
@@ -247,12 +250,13 @@ public class Combat : AnimationScript
             m_AttackType = AttackType.Fast;
             m_Animator.CrossFade($"Fast Attack " + index, 0.1f);
             SwingAudioSource.PlayDelayed(audioDelay);
+            m_BlockedRecently = 1f;
         }
     }
 
     private void HandleStrongAttack()
     {
-        if (m_WeaponType != WeaponType.Sword || m_WeaponType != WeaponType.Spear)
+        if (m_WeaponType != WeaponType.Sword && m_WeaponType != WeaponType.Spear)
         {
             return;
         }
@@ -263,16 +267,16 @@ public class Combat : AnimationScript
 
         if (m_InputHandler.GetAttackDown())
         {
-            m_HoldTime += m_InputHandler.GetAttackHoldTime();
+            m_HoldTime += Time.deltaTime;
         }
-        if (m_HoldTime > 0 && m_HoldTime >= MIN_HOLD_TIME && !(m_StrongAttackBeingPerformed > 0))
+        if (m_HoldTime > 0 && m_HoldTime >= MIN_HOLD_TIME && m_StrongAttackBeingPerformed <= 0)
         {
             PlayerMovement.PauseControls(1);
             ResetTime();
             MeleeWeapon.AttackAllowed = true;
             m_AttackType = AttackType.Strong;
             m_Animator.CrossFade($"Strong Attack", 0.1f);
-            m_StrongAttackBeingPerformed = 0.5f;
+            m_StrongAttackBeingPerformed = 1.5f;
             SwingAudioSource.PlayDelayed(audioDelay);
         }
     }
