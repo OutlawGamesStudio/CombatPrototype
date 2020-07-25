@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 public enum WeaponType
@@ -29,6 +30,7 @@ public class Combat : AnimationScript
 
     private SwordCombat m_SwordCombat;
     private BowCombat m_BowCombat;
+    private SpearCombat m_SpearCombat;
     private CombatBlock m_Block;
     private LockOn m_LockOn;
     private Dodge m_Dodge;
@@ -52,8 +54,10 @@ public class Combat : AnimationScript
         AudioSource.loop = false;
         m_SwordCombat = new SwordCombat(m_Animator, SwingAudioSource);
         m_BowCombat = new BowCombat(m_Animator);
+        m_SpearCombat = new SpearCombat(m_Animator);
         m_CombatScripts.Add(m_SwordCombat);
         m_CombatScripts.Add(m_BowCombat);
+        m_CombatScripts.Add(m_SpearCombat);
 
         m_Block = new CombatBlock(m_Animator);
         m_LockOn = new LockOn(m_Animator, transform);
