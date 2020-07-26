@@ -1559,6 +1559,8 @@ MonoBehaviour:
     IsBoss: 1
     CharacterType: 1
     InCombat: 0
+    MaxMana: 0
+    CurrentMana: 0
 --- !u!195 &285622711
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3403,6 +3405,8 @@ MonoBehaviour:
     IsBoss: 0
     CharacterType: 0
     InCombat: 0
+    MaxMana: 0
+    CurrentMana: 0
 --- !u!195 &542805286
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3869,6 +3873,8 @@ MonoBehaviour:
     IsBoss: 0
     CharacterType: 1
     InCombat: 0
+    MaxMana: 0
+    CurrentMana: 0
 --- !u!114 &602577824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4003,7 +4009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495f407a73bc5bb4bbe5866f81613b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CombatAudioClips: []
+  m_AudioClips: []
 --- !u!82 &646762891
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8651,7 +8657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073fc86a1b7ae4848b6fa34d97a4f5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ExploreAudioTracks: []
+  m_AudioClips: []
 --- !u!82 &1640266866
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11399,6 +11405,8 @@ MonoBehaviour:
     IsBoss: 0
     CharacterType: 0
     InCombat: 0
+    MaxMana: 0
+    CurrentMana: 0
 --- !u!4 &1031632035039575624
 Transform:
   m_ObjectHideFlags: 0
