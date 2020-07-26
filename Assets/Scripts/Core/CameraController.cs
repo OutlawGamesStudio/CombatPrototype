@@ -5,7 +5,7 @@ public class CameraController : Singleton<CameraController>
     private const float MAX_UPDOWN = 80f;
     private const float MIN_DISTANCE = 2f;
     private const float MAX_DISTANCE = 4f;
-    private const int SPEED_MULT = 4;
+    private const float SPEED_MULT = 2f;
 
     [SerializeField] private float m_RotationSpeed = 4;
     [SerializeField] private Transform m_Target = null;
