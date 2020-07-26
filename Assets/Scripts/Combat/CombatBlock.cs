@@ -36,9 +36,8 @@ public class CombatBlock : CombatScript
         if (m_InputHandler.GetShieldDown() && m_BlockTime <= 0)
         {
             m_Animator.SetBool("Blocking", true);
-            m_Animator.CrossFade($"Sword Block", 0.1f);
+            m_Animator.CrossFade($"Shield Block", 0.1f);
             m_BlockTime += Time.deltaTime;
-            Debug.Log("Blocking " + m_BlockTime);
         }
         if (m_InputHandler.GetShieldUp())
         {
