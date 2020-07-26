@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class CombatMusic : MonoBehaviour
+public class CombatMusic : Singleton<CombatMusic>
 {
     private AudioSource m_AudioSource = null;
     private Transform m_Player = null;
     [SerializeField] private AudioClip[] m_CombatAudioClips = null;
+    public bool EnemyFound { get; private set; }
 
     private void Start()
     {
@@ -42,34 +42,25 @@ public class CombatMusic : MonoBehaviour
 
         if(nearestEnemy == null)
         {
-            if(m_AudioSource.isPlaying)
+            if(m_AudioSource.isPlaying && m_AudioSource.volume > 0)
             {
-                FadeOutAudio();
+                m_AudioSource.volume -= 0.01f;
+                if(m_AudioSource.volume <= 0)
+                {
+                    m_AudioSource.volume = 0;
+                    m_AudioSource.Stop();
+                }
             }
+            EnemyFound = false;
             return;
         }
         if (!m_AudioSource.isPlaying)
         {
             int index = Random.Range(0, m_CombatAudioClips.Length+1);
             m_AudioSource.clip = m_CombatAudioClips[index];
+            m_AudioSource.volume = 1;
             m_AudioSource.Play();
-            return;
         }
-    }
-
-    private void FadeOutAudio()
-    {
-        StartFade(m_AudioSource);
-    }
-
-    public IEnumerator StartFade(AudioSource audioSource)
-    {
-        while (audioSource.volume > 0)
-        {
-            audioSource.volume -= 0.1f;
-            yield return null;
-        }
-        audioSource.Stop(); 
-        yield break;
+        EnemyFound = true;
     }
 }
