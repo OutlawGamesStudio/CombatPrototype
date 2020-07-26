@@ -56,7 +56,8 @@ public class CombatMusic : Singleton<CombatMusic>
         }
         if (!m_AudioSource.isPlaying)
         {
-            int index = Random.Range(0, m_CombatAudioClips.Length+1);
+            int index = Random.Range(0, m_CombatAudioClips.Length);
+            Debug.Log($"Playing combat track {m_CombatAudioClips[index].name}");
             m_AudioSource.clip = m_CombatAudioClips[index];
             m_AudioSource.volume = 1;
             m_AudioSource.Play();
