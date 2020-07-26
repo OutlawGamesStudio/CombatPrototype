@@ -50,7 +50,7 @@ public class ExploreMusic : MonoBehaviour
         if (!m_AudioSource.isPlaying)
         {
             int index = Random.Range(0, m_ExploreAudioTracks.Length + 1);
-            m_AudioSource.clip = m_ExploreAudioTracks[index];
+            m_AudioSource.clip = m_ExploreAudioTracks[index - 1];
             m_AudioSource.volume = 1;
             m_AudioSource.Play();
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http.Headers;
 using UnityEngine;
 
 public enum WeaponType
@@ -21,9 +20,15 @@ public enum AttackType
 
 public class Combat : AnimationScript
 {
+    #region Properties
+    public static AudioSource AudioSource { get; set; }
+    public static Sheath Sheath { get; private set; }
+    public bool WeaponSheathed { get; private set; }
+    #endregion
+
+    #region Variables
     private static Combat Instance;
 
-    public static AudioSource AudioSource { get; set; }
     [SerializeField] private AudioSource SwingAudioSource = null;
     [SerializeField] private WeaponType m_WeaponType = WeaponType.Fists;
     private List<CombatScript> m_CombatScripts = new List<CombatScript>();
@@ -34,10 +39,10 @@ public class Combat : AnimationScript
     private CombatBlock m_Block;
     private LockOn m_LockOn;
     private Dodge m_Dodge;
-    public Sheath Sheath { get; private set; }
+    private SwitchWeapon m_SwitchWeapon;
+    #endregion
 
-    public bool WeaponSheathed { get; private set; }
-
+    #region Methods
     private void Awake()
     {
         if (Instance == null)
@@ -63,11 +68,13 @@ public class Combat : AnimationScript
         m_LockOn = new LockOn(m_Animator, transform);
         m_Dodge = new Dodge(m_Animator);
         Sheath = new Sheath(m_Animator, m_CombatScripts, AudioSource);
+        m_SwitchWeapon = new SwitchWeapon(m_Animator);
     }
 
     // Update is called once per frame
     private void Update()
     {
+        m_SwitchWeapon.Execute();
         Sheath.Execute();
         if (Player.Instance.CharacterStats.InCombat == true)
         {
@@ -94,9 +101,17 @@ public class Combat : AnimationScript
         m_LockOn.PostExecute();
         Sheath.PostExecute();
     }
+    #endregion
 
+    #region Static Methods
     public static bool GetCombat()
     {
-        return !Instance.Sheath.IsSheathed;
+        return !Sheath.IsSheathed;
     }
+
+    public static void SetWeaponType(WeaponType weaponType)
+    {
+        Instance.m_WeaponType = weaponType;
+    }
+    #endregion
 }
