@@ -36,6 +36,7 @@ public class Combat : AnimationScript
     private SwordCombat m_SwordCombat;
     private BowCombat m_BowCombat;
     private SpearCombat m_SpearCombat;
+    private MagicCombat m_MagicCombat;
     private CombatBlock m_Block;
     private LockOn m_LockOn;
     private Dodge m_Dodge;
@@ -60,6 +61,7 @@ public class Combat : AnimationScript
         m_SwordCombat = new SwordCombat(m_Animator, SwingAudioSource);
         m_BowCombat = new BowCombat(m_Animator);
         m_SpearCombat = new SpearCombat(m_Animator);
+        m_MagicCombat = new MagicCombat(m_Animator);
         m_CombatScripts.Add(m_SwordCombat);
         m_CombatScripts.Add(m_BowCombat);
         m_CombatScripts.Add(m_SpearCombat);
@@ -81,7 +83,8 @@ public class Combat : AnimationScript
             m_LockOn.Execute();
             m_Dodge.Execute();
             m_Block.Execute();
-            foreach(var combatScript in m_CombatScripts)
+            m_MagicCombat.Execute();
+            foreach (var combatScript in m_CombatScripts)
             {
                 if(combatScript.WeaponType == m_WeaponType)
                 {
@@ -98,6 +101,7 @@ public class Combat : AnimationScript
                 break;
             }
         }
+        m_MagicCombat.PostExecute();
         m_LockOn.PostExecute();
         Sheath.PostExecute();
     }

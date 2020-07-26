@@ -108,4 +108,9 @@ public class InputHandler : Singleton<InputHandler>
     {
         return InputActions.Attack.LockOn.ReadValue<float>() > 0;
     }
+
+    public bool GetMagic()
+    {
+        return InputActions.Attack.CastSpell.ReadValue<float>() > 0;
+    }
 }

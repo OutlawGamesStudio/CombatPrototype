@@ -21,4 +21,6 @@ public class CharacterStats
     public bool IsBoss;
     public CharacterType CharacterType;
     public bool InCombat;
+    public float MaxMana;
+    public float CurrentMana;
 }
