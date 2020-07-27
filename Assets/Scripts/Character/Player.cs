@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
 
-public class Player : Singleton<Player>
+public class Player : Actor
 {
-    public CharacterStats CharacterStats;
+    public static Player Instance { get; private set; }
 
-    private void Update()
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else Destroy(gameObject);
+    }
+
+    protected override void Update()
     {
         CharacterStats.Position = transform.position;
         CharacterStats.Rotation = transform.rotation;
