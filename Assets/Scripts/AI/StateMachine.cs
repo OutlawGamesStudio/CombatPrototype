@@ -1,91 +1,145 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(NPC))]
 public class StateMachine : MonoBehaviour
 {
-    [SerializeField] private AiState m_StartingState = null;
-    [SerializeField] private AiState m_CurrentState;
-    [SerializeField] private AiState m_LastState;
-    public NavMeshAgent NavMeshAgent { get; private set; }
-    public NPC NPC { get; private set; }
+    #region Variables
+    private NavMeshAgent m_NavMeshAgent = null;
+    [SerializeField] private AiState m_PreviousState = null;
+    public AiState CurrentState;
+    private AiState m_BackupState = null;
+    private NPC m_NPC = null;
+    private Queue<AiScheduleType> m_AiStateQueue = new Queue<AiScheduleType>();
 
-    private Queue<AiState> StateQueue = new Queue<AiState>();
-
-    public AiState CurrentState => m_CurrentState;
-    public AiState PreviousState => m_LastState;
-
-    private void Awake()
-    {
-        m_CurrentState = null;
-    }
+    [SerializeField] private AiSchedule m_AiSchedule = null;
+    public List<AiScheduleType> queue = new List<AiScheduleType>(); // debugging only, remove once queuing is working
+    #endregion
 
     private void Start()
     {
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-        NPC = GetComponent<NPC>();
-        if (m_StartingState != null)
+        m_NavMeshAgent = GetComponent<NavMeshAgent>();
+        m_NavMeshAgent.autoBraking = true;
+        m_NPC = GetComponent<NPC>();
+        m_BackupState = Resources.Load<AiState>("Ai/IdleState");
+        if (m_AiSchedule == null)
         {
-            EnterState(m_StartingState);
+            Debug.LogError($"You must assign a schedule to the NPC.");
         }
     }
 
     private void Update()
     {
-        if(NPC.CharacterStats.IsDead == true)
+        queue = m_AiStateQueue.ToList();
+        if (m_NPC.CharacterStats.IsDead == true || m_AiSchedule == null)
         {
-            // Do not update if dead.
-            Stop();
-            if(m_CurrentState != null)
-            {
-                m_CurrentState.ExitState();
-            }
-            m_CurrentState = null;
+            StopPathing();
             return;
         }
-        if(StateQueue.Count > 0 && m_CurrentState == null)
+
+        if(m_AiStateQueue.Count < 1)
+        {
+            foreach(var state in m_AiSchedule.aiSchedule)
+            {
+                InsertQueue(state);
+            }
+        }
+
+        if(CurrentState != null && m_PreviousState != null && CurrentState.name == m_PreviousState.name)
         {
             NextState();
             return;
         }
-        if (m_CurrentState != null)
+
+        if (m_AiStateQueue.Count > 0 && CurrentState == null)
         {
-            m_CurrentState.Execute(NPC);
+            if(m_AiStateQueue.ElementAt(0) != null)
+            {
+                NextState();
+            }
+            else
+            {
+                SetCurrentState(m_BackupState);
+            }
+            return;
         }
+        if (CurrentState.ExecutionState == ExecutionState.Terminated || CurrentState.ExecutionState == ExecutionState.Completed)
+        {
+            if (CurrentState.shouldRepeat == true)
+            {
+                AiScheduleType currentState = new AiScheduleType();
+                currentState.aiState = CurrentState;
+                m_AiStateQueue.Enqueue(currentState);
+                Debug.Log($"Adding repeating state {CurrentState.name} to queue.");
+            }
+            if(CurrentState.shouldReturnToPreviousState == true)
+            {
+                SetCurrentState(m_PreviousState);
+                Debug.Log($"Setting CurrentState to previous state: {CurrentState.name}");
+            }
+            else
+            {
+                NextState();
+            }
+            return;
+        }
+        CurrentState.Execute(Time.deltaTime);
     }
 
-    public void SetDestination(Vector3 position)
+    private void NextState()
     {
-        NavMeshAgent.isStopped = false;
-        NavMeshAgent.SetDestination(position);
+        AiScheduleType aiState = m_AiStateQueue.Dequeue();
+        SetCurrentState(aiState);
+        Debug.Log($"Dequeueing state {aiState.aiState}");
     }
 
-    public void Stop()
+    public void SetCurrentState(AiScheduleType aiState, bool ignoreRequirements = false)
     {
-        NavMeshAgent.isStopped = true;
+        if(ignoreRequirements == false && aiState.HasMetCondition() == false)
+        {
+            return;
+        }
+        m_PreviousState = CurrentState;
+        CurrentState = aiState.aiState;
+        CurrentState.EnterState(this, Time.deltaTime);
     }
 
-    public void NextState()
+    public void SetCurrentState(AiState aiState)
     {
-        EnterState(StateQueue.Dequeue());
+        m_PreviousState = CurrentState;
+        CurrentState = aiState;
+        CurrentState.EnterState(this, Time.deltaTime);
     }
 
-    public void EnterState(AiState nextState)
+    public bool PathTo(Vector3 destination)
     {
-        m_LastState = m_CurrentState;
-        m_CurrentState = nextState;
-        m_CurrentState.EnterState(this);
+        if(m_NavMeshAgent.isStopped)
+        {
+            m_NavMeshAgent.isStopped = false;
+        }
+
+        m_NavMeshAgent.SetDestination(destination);
+        return true;
     }
 
-    public void ExitState()
+    public void StopPathing()
     {
-        m_CurrentState = null;
+        m_NavMeshAgent.isStopped = true;
     }
 
-    public void InsertState(AiState state)
+    public void FacePosition(Vector3 position, float damping = 2f)
     {
-        StateQueue.Enqueue(state);
+        var lookPos = position - transform.position;
+        lookPos.y = 0;
+        var rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
+    }
+
+    public void InsertQueue(AiScheduleType aiState)
+    {
+        m_AiStateQueue.Enqueue(aiState);
     }
 }

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpearCombat : CombatScript
 {
     public override WeaponType WeaponType => WeaponType.Spear;
-    private const float AUDIO_DELAY = 0.1f;
+    private const float ANIM_DELAY = 0.1f;
     private float m_BlockedRecently;
 
-    public SpearCombat(Animator animator) : base(animator)
+    public SpearCombat(Animator animator, Combat combat) : base(animator, combat)
     {
         m_Unsheath = Resources.Load<AudioClip>("Audio/SFX/Unsheath");
         m_Sheath = Resources.Load<AudioClip>("Audio/SFX/Sheath");
@@ -63,8 +58,7 @@ public class SpearCombat : CombatScript
             ResetTime();
             MeleeWeapon.AttackAllowed = true;
             m_AttackType = AttackType.Fast;
-            m_Animator.CrossFade($"Spear Stab", 0.1f);
-            //m_SwingAudioSource.PlayDelayed(AUDIO_DELAY);
+            m_Animator.CrossFade($"Spear Stab", ANIM_DELAY);
             m_BlockedRecently = 1f;
         }
     }

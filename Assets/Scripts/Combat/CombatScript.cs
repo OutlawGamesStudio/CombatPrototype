@@ -9,9 +9,11 @@ public abstract class CombatScript
     protected AudioClip m_Unsheath;
     protected AudioClip m_Sheath;
     protected float m_HoldTime;
+    protected AnimationScript m_CombatHandler;
 
-    protected CombatScript(Animator animator)
+    protected CombatScript(Animator animator, AnimationScript combatHandler)
     {
+        m_CombatHandler = combatHandler;
         m_InputHandler = InputHandler.Instance;
         m_Animator = animator;
         ResetTime();

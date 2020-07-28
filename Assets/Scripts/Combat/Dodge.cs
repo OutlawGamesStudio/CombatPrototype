@@ -6,7 +6,7 @@ public class Dodge : CombatScript
 {
     public override WeaponType WeaponType => throw new NotImplementedException();
 
-    public Dodge(Animator animator) : base(animator)
+    public Dodge(Animator animator, Combat combat) : base(animator, combat)
     {
 
     }

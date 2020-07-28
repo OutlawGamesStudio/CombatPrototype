@@ -13,7 +13,7 @@ public class SwordCombat : CombatScript
     private AudioSource m_SwingAudioSource;
     private float m_StrongAttackBeingPerformed;
 
-    public SwordCombat(Animator animator, AudioSource swingSource) : base(animator)
+    public SwordCombat(Animator animator, AudioSource swingSource, AnimationScript combat) : base(animator, combat)
     {
         m_SwingAudioSource = swingSource;
         m_Unsheath = Resources.Load<AudioClip>("Audio/SFX/Unsheath");
@@ -69,14 +69,18 @@ public class SwordCombat : CombatScript
         }
         if (m_InputHandler.GetAttackUp() && m_HoldTime > 0 && m_HoldTime < MIN_HOLD_TIME)
         {
-            int index = Convert.ToInt32(Random.value > 0.5f) + 1;
-            ResetTime();
-            MeleeWeapon.AttackAllowed = true;
-            m_AttackType = AttackType.Fast;
-            m_Animator.CrossFade($"Fast Attack " + index, 0.1f);
-            m_SwingAudioSource.PlayDelayed(AUDIO_DELAY);
-            m_BlockedRecently = 1f;
+            StartAttack();
         }
+    }
+
+    public void StartAttack()
+    {
+        ResetTime();
+        MeleeWeapon.AttackAllowed = true;
+        m_AttackType = AttackType.Fast;
+        m_CombatHandler.PlayFastAttack(WeaponType);
+        m_SwingAudioSource.PlayDelayed(AUDIO_DELAY);
+        m_BlockedRecently = 1f;
     }
 
     private void HandleStrongAttack()
@@ -100,7 +104,7 @@ public class SwordCombat : CombatScript
             ResetTime();
             MeleeWeapon.AttackAllowed = true;
             m_AttackType = AttackType.Strong;
-            m_Animator.CrossFade($"Strong Attack", 0.1f);
+            m_CombatHandler.PlayStrongAttack(WeaponType);
             m_StrongAttackBeingPerformed = 1.5f;
             m_SwingAudioSource.PlayDelayed(AUDIO_DELAY);
         }

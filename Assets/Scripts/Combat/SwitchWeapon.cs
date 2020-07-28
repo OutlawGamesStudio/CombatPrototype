@@ -6,7 +6,7 @@ public class SwitchWeapon : CombatScript
     public override WeaponType WeaponType => throw new NotImplementedException();
     private WeaponType m_CurrentWeaponType;
 
-    public SwitchWeapon(Animator animator) : base(animator)
+    public SwitchWeapon(Animator animator, Combat combat) : base(animator, combat)
     {
 
     }

@@ -7,7 +7,7 @@ public class LockOn : CombatScript
     private NPC m_LockOnTarget;
     private Transform m_Transform;
 
-    public LockOn(Animator animator, Transform transform) : base(animator)
+    public LockOn(Animator animator, Transform transform, Combat combat) : base(animator, combat)
     {
         m_Transform = transform;
     }

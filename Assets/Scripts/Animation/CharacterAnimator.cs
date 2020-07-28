@@ -7,10 +7,6 @@ public class CharacterAnimator : AnimationScript
     public float PauseMovement { get; private set; }
     public Vector2 CharacterMovementVelocity { get; protected set; } = new Vector2();
 
-    [SerializeField] private Animation[] m_FastAttacks = null;
-    [SerializeField] private Animation[] m_StrongAttacks = null;
-    [SerializeField] private Animation[] m_DodgeAttacks = null;
-
     protected override void Start()
     {
         base.Start();
@@ -128,12 +124,6 @@ public class CharacterAnimator : AnimationScript
         {
             SetPauseMovement(0.5f);
         }
-        m_Animator.CrossFade(animation, .1f);
-    }
-
-    public void AttackAnimation(bool strong = false)
-    {
-        int randIndex = Random.Range(0, strong == false ? m_FastAttacks.Length : m_StrongAttacks.Length);
-        PlayAnimation(strong == false ? m_FastAttacks[randIndex].name : m_StrongAttacks[randIndex].name, strong == false ? false : true);
+        PlayAnimation(animation);
     }
 }

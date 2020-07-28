@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824a3c20780d21a4abe599eb4ef7da4b, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  aiSchedule:
+  - name: Point 1
+    timeOfDay: 0
+    maxTimeOfDay: 10
+    dayOfWeek: 0
+    aiState: {fileID: 11400000, guid: e810664159a019e40b60f090efe8ccf7, type: 2}
+  - name: Point 2
+    timeOfDay: 10
+    maxTimeOfDay: 20
+    dayOfWeek: 0
+    aiState: {fileID: 11400000, guid: 5a368335395a0234a92d4a150401cf2b, type: 2}
+  - name: Face
+    timeOfDay: -1
+    maxTimeOfDay: -1
+    dayOfWeek: 0
+    aiState: {fileID: 11400000, guid: c64fc60b04065d149a80f5fb5a269374, type: 2}

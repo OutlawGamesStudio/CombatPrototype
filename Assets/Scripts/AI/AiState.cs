@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public enum ExecutionState
 {
@@ -14,43 +11,31 @@ public enum ExecutionState
 public abstract class AiState : ScriptableObject
 {
     public ExecutionState ExecutionState { get; protected set; }
+
+    [Range(0f, 1f)] public float statePriority;
+    public bool shouldRepeat = false;
+    public bool shouldReturnToPreviousState = false;
+
     protected StateMachine m_StateMachine;
 
-
-    public virtual void OnEnable()
+    public virtual bool EnterState(StateMachine stateMachine, float deltaTime)
     {
-        ExecutionState = ExecutionState.None;
-    }
-
-    public virtual bool EnterState(StateMachine stateMachine)
-    {
-        ExecutionState = ExecutionState.Active;
         m_StateMachine = stateMachine;
+        ExecutionState = ExecutionState.Active;
         return true;
     }
 
-    public abstract void Execute(NPC npc);
+    public virtual bool TerminateState()
+    {
+        ExecutionState = ExecutionState.Terminated;
+        return true;
+    }
 
-    public virtual bool ExitState()
+    public virtual bool CompleteState()
     {
         ExecutionState = ExecutionState.Completed;
-        m_StateMachine.ExitState();
         return true;
     }
 
-    protected bool PathTo(Vector3 destination)
-    {
-        m_StateMachine.SetDestination(destination);
-        Vector3 position = m_StateMachine.transform.position;
-        float destinationTolerance = 1f;
-
-        float distance = Vector3.Distance(position, destination);
-        bool destinationReached = distance <= destinationTolerance;
-
-        if(!destinationReached)
-        {
-            
-        }
-        return false;
-    }
+    public abstract void Execute(float deltaTime);
 }

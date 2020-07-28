@@ -12,7 +12,7 @@ public class Sheath : CombatScript
     public List<CombatScript> m_CombatScripts;
     private AudioSource m_AudioSource;
 
-    public Sheath(Animator animator, List<CombatScript> combatScripts, AudioSource audioSource) : base(animator)
+    public Sheath(Animator animator, List<CombatScript> combatScripts, AudioSource audioSource, Combat combat) : base(animator, combat)
     {
         m_CombatScripts = combatScripts;
         m_AudioSource = audioSource;

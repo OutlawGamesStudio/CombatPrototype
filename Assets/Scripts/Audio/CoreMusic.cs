@@ -57,7 +57,6 @@ public abstract class CoreMusic : MonoBehaviour
         if (!m_AudioSource.isPlaying)
         {
             int index = Random.Range(0, m_AudioClips.Length);
-            Debug.Log($"Playing {AudioFolder.ToLower()} track {m_AudioClips[index].name}");
             m_AudioSource.clip = m_AudioClips[index];
             m_AudioSource.volume = 1;
             m_AudioSource.Play();

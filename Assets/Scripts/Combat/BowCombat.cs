@@ -4,7 +4,7 @@ public class BowCombat : CombatScript
 {
     public override WeaponType WeaponType => WeaponType.Bow;
 
-    public BowCombat(Animator animator) : base(animator)
+    public BowCombat(Animator animator, Combat combat) : base(animator, combat)
     {
         // Keep it as the Sword sfx for now.
         m_Unsheath = Resources.Load<AudioClip>("Audio/SFX/Unsheath");

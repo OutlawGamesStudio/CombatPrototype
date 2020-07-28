@@ -6,7 +6,7 @@ public class CombatBlock : CombatScript
     public override WeaponType WeaponType => WeaponType.Other;
     private float m_BlockTime = 0f;
 
-    public CombatBlock(Animator animator) : base(animator)
+    public CombatBlock(Animator animator, Combat combat) : base(animator, combat)
     {
     }
 

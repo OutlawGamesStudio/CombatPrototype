@@ -24,7 +24,7 @@ public class MagicCombat : CombatScript
     private Player m_Caster;
     private AudioClip m_SpellEquip;
 
-    public MagicCombat(Animator animator) : base(animator)
+    public MagicCombat(Animator animator, Combat combat) : base(animator, combat)
     {
         m_Caster = Player.Instance;
         m_SpellEquip = Resources.Load<AudioClip>("Audio/SFX/Magical Swoosh");

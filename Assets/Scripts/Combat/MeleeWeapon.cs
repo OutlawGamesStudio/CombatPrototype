@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Build;
+using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 public class MeleeWeapon : MonoBehaviour
@@ -19,6 +20,10 @@ public class MeleeWeapon : MonoBehaviour
         HitClip = Resources.Load<AudioClip>("Audio/SFX/Hit Body 1");
         AudioSource = gameObject.AddComponent<AudioSource>();
         AudioSource.loop = false;
+        if(transform.root.gameObject.TryGetComponent<CapsuleCollider>(out CapsuleCollider capsuleCollider) == true)
+        {
+            Physics.IgnoreCollision(m_BoxCollider, capsuleCollider);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +33,7 @@ public class MeleeWeapon : MonoBehaviour
             return;
         }
 
-        if(other.gameObject.TryGetComponent(out NPC npc))
+        if(other.gameObject.TryGetComponent(out Actor actor))
         {
             AttackAllowed = false;
             if (StrongAttack)
@@ -40,7 +45,7 @@ public class MeleeWeapon : MonoBehaviour
                 AudioSource.clip = BluntClip;
             }
             StrongAttack = false;
-            npc.OnWeaponDamage(WeaponStats.BaseDamage);
+            actor.OnWeaponDamage(WeaponStats.BaseDamage);
             AudioSource.Play();
         }
     }

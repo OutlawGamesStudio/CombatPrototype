@@ -1,6 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
+public enum AnimationType
+{
+    None,
+    Humanoid,
+    Zombie
+};
+
 // Replace this later with a more robust system so we can customise wether an NPC can attack another NPC, etc.
 public enum CharacterType
 {
@@ -23,4 +30,6 @@ public class CharacterStats
     public bool InCombat;
     public float MaxMana;
     public float CurrentMana;
+    public WeaponType CombatStyle;
+    public AnimationType AnimationType;
 }
