@@ -15,5 +15,5 @@ MonoBehaviour:
   statePriority: 0
   shouldRepeat: 1
   shouldReturnToPreviousState: 0
-  destination: {x: 0, y: 0, z: 45}
+  destination: {x: 0, y: 0, z: 30}
   destinationTolerance: 1
