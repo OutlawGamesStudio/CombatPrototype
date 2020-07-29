@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,10 +11,6 @@ public class StateMachine : MonoBehaviour
     public AiState CurrentState;
     private AiState m_BackupState = null;
     private NPC m_NPC = null;
-    private Queue<AiScheduleType> m_AiStateQueue = new Queue<AiScheduleType>();
-
-    [SerializeField] private AiSchedule m_AiSchedule = null;
-    public List<AiScheduleType> queue = new List<AiScheduleType>(); // debugging only, remove once queuing is working
     #endregion
 
     private void Start()
@@ -25,83 +19,45 @@ public class StateMachine : MonoBehaviour
         m_NavMeshAgent.autoBraking = true;
         m_NPC = GetComponent<NPC>();
         m_BackupState = Resources.Load<AiState>("Ai/IdleState");
-        if (m_AiSchedule == null)
-        {
-            Debug.LogError($"You must assign a schedule to the NPC.");
-        }
     }
 
     private void Update()
     {
-        queue = m_AiStateQueue.ToList();
-        if (m_NPC.CharacterStats.IsDead == true || m_AiSchedule == null)
+        if (m_NPC.CharacterStats.IsDead == true)
         {
             StopPathing();
             return;
         }
 
-        if(m_AiStateQueue.Count < 1)
+        if (CurrentState == null)
         {
-            foreach(var state in m_AiSchedule.aiSchedule)
-            {
-                InsertQueue(state);
-            }
-        }
-
-        if(CurrentState != null && m_PreviousState != null && CurrentState.name == m_PreviousState.name)
-        {
-            NextState();
+            SetCurrentState(m_BackupState);
             return;
         }
 
-        if (m_AiStateQueue.Count > 0 && CurrentState == null)
-        {
-            if(m_AiStateQueue.ElementAt(0) != null)
-            {
-                NextState();
-            }
-            else
-            {
-                SetCurrentState(m_BackupState);
-            }
-            return;
-        }
         if (CurrentState.ExecutionState == ExecutionState.Terminated || CurrentState.ExecutionState == ExecutionState.Completed)
         {
-            if (CurrentState.shouldRepeat == true)
-            {
-                AiScheduleType currentState = new AiScheduleType();
-                currentState.aiState = CurrentState;
-                m_AiStateQueue.Enqueue(currentState);
-                Debug.Log($"Adding repeating state {CurrentState.name} to queue.");
-            }
-            if(CurrentState.shouldReturnToPreviousState == true)
+            if (ShouldReturnToPreviousState())
             {
                 SetCurrentState(m_PreviousState);
                 Debug.Log($"Setting CurrentState to previous state: {CurrentState.name}");
-            }
-            else
-            {
-                NextState();
             }
             return;
         }
         CurrentState.Execute(Time.deltaTime);
     }
 
-    private void NextState()
+    private bool ShouldReturnToPreviousState()
     {
-        AiScheduleType aiState = m_AiStateQueue.Dequeue();
-        SetCurrentState(aiState);
-        Debug.Log($"Dequeueing state {aiState.aiState}");
+        if (CurrentState.shouldReturnToPreviousState == true)
+        {
+            return true;
+        }
+        return false;
     }
 
-    public void SetCurrentState(AiScheduleType aiState, bool ignoreRequirements = false)
+    public void SetCurrentState(AiScheduleType aiState)
     {
-        if(ignoreRequirements == false && aiState.HasMetCondition() == false)
-        {
-            return;
-        }
         m_PreviousState = CurrentState;
         CurrentState = aiState.aiState;
         CurrentState.EnterState(this, Time.deltaTime);
@@ -136,10 +92,5 @@ public class StateMachine : MonoBehaviour
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
-    }
-
-    public void InsertQueue(AiScheduleType aiState)
-    {
-        m_AiStateQueue.Enqueue(aiState);
     }
 }

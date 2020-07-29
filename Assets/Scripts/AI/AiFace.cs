@@ -9,6 +9,10 @@ public class AiFace : AiWait
     public override bool EnterState(StateMachine stateMachine, float deltaTime)
     {
         m_CurrentPosition = stateMachine.transform.position;
+        if(WaitSeconds < 1)
+        {
+            WaitSeconds = 5;
+        }
         return base.EnterState(stateMachine, deltaTime);
     }
 

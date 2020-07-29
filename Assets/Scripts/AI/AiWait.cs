@@ -13,6 +13,7 @@ public class AiWait : AiState
 
     public override void Execute(float deltaTime)
     {
+        m_StateMachine.StopPathing();
         if(m_CurrentWaitTime >= WaitSeconds)
         {
             Debug.Log($"Exiting Idle State after {WaitSeconds}");
