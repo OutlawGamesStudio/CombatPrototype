@@ -1518,8 +1518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PreviousState: {fileID: 0}
-  m_AiSchedule: {fileID: 0}
-  queue: []
+  CurrentState: {fileID: 0}
 --- !u!114 &285622709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,6 +1546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterStats:
+    CharacterID: 0
     Name: Boss
     IsDead: 0
     Level: 3
@@ -3365,8 +3365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PreviousState: {fileID: 0}
-  m_AiSchedule: {fileID: 0}
-  queue: []
+  CurrentState: {fileID: 0}
 --- !u!114 &542805284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3394,6 +3393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterStats:
+    CharacterID: 0
     Name: NPC
     IsDead: 0
     Level: 2
@@ -3895,6 +3895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterStats:
+    CharacterID: 0
     Name: Enemy
     IsDead: 0
     Level: 2
@@ -3923,8 +3924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PreviousState: {fileID: 0}
-  m_AiSchedule: {fileID: 11400000, guid: c0c73c6bd5c4b3c4aa41db0a7b31fc4b, type: 2}
-  queue: []
+  CurrentState: {fileID: 0}
 --- !u!195 &602577825
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9205,6 +9205,50 @@ Transform:
   m_Father: {fileID: 2095715013}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1746331755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1746331757}
+  - component: {fileID: 1746331756}
+  m_Layer: 0
+  m_Name: ScriptManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1746331756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746331755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d163e15d456efd8418276f3e5e5a7d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ScriptFiles: []
+--- !u!4 &1746331757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746331755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1749497991
 GameObject:
   m_ObjectHideFlags: 0
@@ -11647,6 +11691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterStats:
+    CharacterID: 0
     Name: 
     IsDead: 0
     Level: 0

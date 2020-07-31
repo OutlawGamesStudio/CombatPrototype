@@ -18,6 +18,7 @@ public enum CharacterType
 [Serializable]
 public class CharacterStats
 {
+    public uint CharacterID;
     public string Name;
     public bool IsDead;
     public int Level;

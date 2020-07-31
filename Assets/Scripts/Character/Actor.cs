@@ -30,9 +30,15 @@ public class Actor : MonoBehaviour
 
     public virtual void OnWeaponDamage(float damage)
     {
+        if(CharacterStats.IsDead == true)
+        {
+            return;
+        }
+
         CharacterStats.CurrentHealth -= damage;
         if (CharacterStats.CurrentHealth <= 0)
         {
+            ScriptManager.Instance.InvokeEvent("OnActorDeath", CharacterStats.CharacterID);
             CharacterStats.IsDead = true;
         }
     }
