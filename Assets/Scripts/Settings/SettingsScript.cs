@@ -2,7 +2,7 @@
 
 public class SettingsScript : Singleton<SettingsScript>
 {
-    public Settings Settings;
+    public Settings Settings { get; private set; }
 
     private void Start()
     {
