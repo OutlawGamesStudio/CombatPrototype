@@ -17,7 +17,6 @@ public class ScriptManager : Singleton<ScriptManager>
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Starting Script Interpreter...");
         m_VMSettings = LuaVM.VMSettings.AttachAll;
         m_LuaVM = new LuaVM(m_VMSettings);
 
@@ -46,7 +45,6 @@ public class ScriptManager : Singleton<ScriptManager>
             return;
         }
 
-        Debug.Log($"RunScript: {script.scriptName} (Events: {callbacks.Length})");
         string scriptSource = File.ReadAllText(script.scriptPath);
         m_LuaVM.ExecuteString(scriptSource);
         if (callbacks != null)
@@ -63,7 +61,6 @@ public class ScriptManager : Singleton<ScriptManager>
         ScriptCallback scriptCallback = new ScriptCallback();
         scriptCallback.callbackName = eventName;
         scriptCallback.callbackParamaters = paramaters;
-        Debug.Log($"Invoking {eventName} in {m_ScriptFiles.Count} scripts.");
         foreach (var item in m_ScriptFiles)
         {
             RunScript(item, new ScriptCallback[] { scriptCallback } );
@@ -74,7 +71,6 @@ public class ScriptManager : Singleton<ScriptManager>
     {
         if(m_LuaVM.DoesCallExist(eventName) == true)
         {
-            Debug.Log($"Internal_InvokeEvent: {eventName} (Paramaters: {paramaters.Length})");
             m_LuaVM.Call(eventName, paramaters);
         }
     }

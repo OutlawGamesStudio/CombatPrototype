@@ -8,6 +8,7 @@ public class NPC : Actor
 
     public NPCAnimator NPCAnimator { get; private set; }
     public NpcCombat NPCCombat { get; private set; }
+    public ActorDialogue ActorDialogue;
 
     protected override void Start()
     {

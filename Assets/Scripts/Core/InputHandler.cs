@@ -113,4 +113,9 @@ public class InputHandler : Singleton<InputHandler>
     {
         return InputActions.Attack.CastSpell.ReadValue<float>() > 0;
     }
+
+    public bool GetActivate()
+    {
+        return InputActions.Interface.Activate.ReadValue<float>() > 0;
+    }
 }
