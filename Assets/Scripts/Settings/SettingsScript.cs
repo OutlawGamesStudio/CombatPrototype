@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SettingsScript : MonoBehaviour
+public class SettingsScript : Singleton<SettingsScript>
 {
     public Settings Settings;
 

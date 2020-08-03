@@ -94,18 +94,18 @@ public static class SettingsController
         parsedData["General"].AddKey("scriptUpdateInterval", settings.scriptUpdateInterval.ToString());
 
         parsedData.Sections.AddSection("Graphics");
-        parsedData["Graphics"].AddKey("antiAliasing", settings.antiAliasing.ToString());
-        parsedData["Graphics"].AddKey("textureQuality", settings.textureQuality.ToString());
-        parsedData["Graphics"].AddKey("lodDistance", settings.lodDistance.ToString());
-        parsedData["Graphics"].AddKey("shadowResolution", settings.shadowResolution.ToString());
-        parsedData["Graphics"].AddKey("shadowDistance", settings.shadowDistance.ToString());
-        parsedData["Graphics"].AddKey("vsyncCount", settings.vsyncCount.ToString());
+        parsedData["Graphics"].AddKey("antiAliasing", settings.antiAliasing.ToString("d"));
+        parsedData["Graphics"].AddKey("textureQuality", settings.textureQuality.ToString("d"));
+        parsedData["Graphics"].AddKey("lodDistance", settings.lodDistance.ToString("d"));
+        parsedData["Graphics"].AddKey("shadowResolution", settings.shadowResolution.ToString("d"));
+        parsedData["Graphics"].AddKey("shadowDistance", settings.shadowDistance.ToString("d"));
+        parsedData["Graphics"].AddKey("vsyncCount", settings.vsyncCount.ToString("d"));
         parsedData["Graphics"].AddKey("softParticles", settings.softParticles.ToString());
         parsedData["Graphics"].AddKey("ansioFiltering", settings.ansioFiltering.ToString());
         parsedData["Graphics"].AddKey("borderless", settings.borderless.ToString());
         parsedData["Graphics"].AddKey("fullscreen", settings.fullscreen.ToString());
-        parsedData["Graphics"].AddKey("width", settings.width.ToString());
-        parsedData["Graphics"].AddKey("height", settings.height.ToString());
+        parsedData["Graphics"].AddKey("width", settings.width.ToString("d"));
+        parsedData["Graphics"].AddKey("height", settings.height.ToString("d"));
 
         parsedData.Sections.AddSection("Audio");
         parsedData["Audio"].AddKey("masterVolume", settings.masterVolume.ToString());
