@@ -13,12 +13,20 @@ public class ScriptManager : Singleton<ScriptManager>
     private LuaVM m_LuaVM;
     private LuaVM.VMSettings m_VMSettings;
     public List<Script> m_ScriptFiles = new List<Script>();
+    private float m_CurrentWaitTime;
+
+    [SerializeField] private float m_WaitTime = 0.2f;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_WaitTime = SettingsScript.Instance.Settings.scriptUpdateInterval;
         m_VMSettings = LuaVM.VMSettings.AttachAll;
         m_LuaVM = new LuaVM(m_VMSettings);
+        if(m_WaitTime < 0.1f)
+        {
+            m_WaitTime = 0.1f;
+        }
 
         // Use forward slashes, even on Windows.
         string scriptPath = Application.streamingAssetsPath + "/Data/Scripts";
@@ -34,6 +42,16 @@ public class ScriptManager : Singleton<ScriptManager>
             scriptCallback.callbackName = "OnStart";
             RunScript(script, new ScriptCallback[] { scriptCallback });
             m_ScriptFiles.Add(script);
+        }
+    }
+
+    private void Update()
+    {
+        m_CurrentWaitTime += Time.deltaTime;
+        if (m_CurrentWaitTime > m_WaitTime)
+        {
+            InvokeEvent("OnUpdate");
+            m_CurrentWaitTime = 0;
         }
     }
 
