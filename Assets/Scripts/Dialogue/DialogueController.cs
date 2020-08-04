@@ -91,8 +91,7 @@ public class DialogueController : MonoBehaviour
     {
         m_DialogueUI.SetActive(toggle);
         m_DialogueChoices.SetActive(toggle);
-        Cursor.lockState = toggle == true ? CursorLockMode.Confined : CursorLockMode.Locked;
-        Cursor.visible = toggle;
+        MouseCursor.SetMouseVisible(toggle);
     }
 
     private void SetDialogueText(string text)

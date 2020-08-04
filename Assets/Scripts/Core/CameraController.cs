@@ -20,8 +20,7 @@ public class CameraController : Singleton<CameraController>
     void Start()
     {
         m_InputHandler = InputHandler.Instance;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        MouseCursor.SetMouseVisible(false);
         m_CameraRotation.x = 0f;
         m_CameraRotation.y = 0f;
         m_Distance = Vector3.Distance(transform.position, m_Target.transform.position);
@@ -47,6 +46,11 @@ public class CameraController : Singleton<CameraController>
 
     private void ProcessData()
     {
+        if(MouseCursor.MouseShown == true)
+        {
+            return;
+        }
+
         m_CameraRotation.y += mouseX * m_RotationSpeed;
         m_CameraRotation.x += mouseY * m_RotationSpeed;
         m_CameraRotation.x = Mathf.Clamp(m_CameraRotation.x, -MAX_UPDOWN, MAX_UPDOWN);
@@ -58,6 +62,11 @@ public class CameraController : Singleton<CameraController>
 
     private void GetInput()
     {
+        if (MouseCursor.MouseShown == true)
+        {
+            return;
+        }
+
         mouseX = m_InputHandler.MouseX;
         mouseY = m_InputHandler.MouseY;
         mouseScroll = m_InputHandler.MouseScroll;
