@@ -1,4 +1,5 @@
 ﻿using ForgottenLegends.Animation;
+using ForgottenLegends.Character;
 using UnityEngine;
 
 public class PlayerMovement : CharacterAnimator

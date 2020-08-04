@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using ForgottenLegends.Character;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

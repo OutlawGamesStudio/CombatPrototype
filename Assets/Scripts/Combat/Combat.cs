@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ForgottenLegends.Character;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum WeaponType

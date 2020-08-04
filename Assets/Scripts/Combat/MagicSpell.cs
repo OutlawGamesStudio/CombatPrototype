@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForgottenLegends.Character;
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MagicSpell", menuName = "Magic Spell")]

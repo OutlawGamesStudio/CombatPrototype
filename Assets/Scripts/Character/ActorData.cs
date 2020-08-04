@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Actor", menuName = "Actor/Actor Data")]
-public class ActorData : ScriptableObject
+namespace ForgottenLegends.Character
 {
-    public CharacterStats CharacterStats;
-    public ActorDialogue ActorDialogue;
+    [CreateAssetMenu(fileName = "Actor", menuName = "Actor/Actor Data")]
+    public class ActorData : ScriptableObject
+    {
+        public CharacterStats CharacterStats;
+        public ActorDialogue ActorDialogue;
+    }
 }

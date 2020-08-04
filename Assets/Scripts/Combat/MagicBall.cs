@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ForgottenLegends.Character;
+using UnityEngine;
 
 public class MagicBall : MonoBehaviour
 {

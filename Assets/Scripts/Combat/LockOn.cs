@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForgottenLegends.Character;
+using System;
 using UnityEngine;
 
 public class LockOn : CombatScript

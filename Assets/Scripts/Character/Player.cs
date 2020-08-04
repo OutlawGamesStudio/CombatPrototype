@@ -1,21 +1,22 @@
-﻿using UnityEngine;
-
-public class Player : Actor
+﻿namespace ForgottenLegends.Character
 {
-    public static Player Instance { get; private set; }
-
-    private void Awake()
+    public class Player : Actor
     {
-        if (Instance == null)
+        public static Player Instance { get; private set; }
+
+        private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else Destroy(gameObject);
         }
-        else Destroy(gameObject);
-    }
 
-    protected override void Update()
-    {
-        ActorData.CharacterStats.Position = transform.position;
-        ActorData.CharacterStats.Rotation = transform.rotation;
+        protected override void Update()
+        {
+            ActorData.CharacterStats.Position = transform.position;
+            ActorData.CharacterStats.Rotation = transform.rotation;
+        }
     }
 }

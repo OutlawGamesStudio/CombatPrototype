@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ForgottenLegends.Character;
+using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 public class MeleeWeapon : MonoBehaviour
