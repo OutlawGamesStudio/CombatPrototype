@@ -1,7 +1,10 @@
 ﻿using System;
 
-[Serializable]
-public class WeaponStats
+namespace ForgottenLegends.Combat
 {
-    public float BaseDamage;
+    [Serializable]
+    public class WeaponStats
+    {
+        public float BaseDamage;
+    }
 }

@@ -1,21 +1,23 @@
 ﻿using ForgottenLegends.Character;
-using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MagicSpell", menuName = "Magic Spell")]
-public class MagicSpell : ScriptableObject
+namespace ForgottenLegends.Combat
 {
-    public GameObject spellObject;
-    public bool isHostileSpell;
-    public float manaCost;
-    public WeaponStats weaponStats;
-
-    public void OnTouchSpell(NPC npc)
+    [CreateAssetMenu(fileName = "MagicSpell", menuName = "Magic Spell")]
+    public class MagicSpell : ScriptableObject
     {
-        if(isHostileSpell)
+        public GameObject spellObject;
+        public bool isHostileSpell;
+        public float manaCost;
+        public WeaponStats weaponStats;
+
+        public void OnTouchSpell(NPC npc)
         {
-            npc.OnWeaponDamage(weaponStats.BaseDamage);
-            return;
+            if (isHostileSpell)
+            {
+                npc.OnWeaponDamage(weaponStats.BaseDamage);
+                return;
+            }
         }
     }
 }

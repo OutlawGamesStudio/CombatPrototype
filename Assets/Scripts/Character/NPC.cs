@@ -1,5 +1,6 @@
 ﻿using ForgottenLegends.AI;
 using ForgottenLegends.Animation;
+using ForgottenLegends.Combat;
 using UnityEngine;
 
 namespace ForgottenLegends.Character

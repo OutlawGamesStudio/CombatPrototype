@@ -1,57 +1,57 @@
 ﻿using ForgottenLegends.Character;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class Sheath : CombatScript
+namespace ForgottenLegends.Combat
 {
-    public override WeaponType WeaponType => throw new NotImplementedException();
-    public bool IsSheathed { get; private set; }
-    public List<CombatScript> m_CombatScripts;
-    private AudioSource m_AudioSource;
-
-    public Sheath(Animator animator, List<CombatScript> combatScripts, AudioSource audioSource, Combat combat) : base(animator, combat)
+    public class Sheath : CombatScript
     {
-        m_CombatScripts = combatScripts;
-        m_AudioSource = audioSource;
-    }
+        public override WeaponType WeaponType => throw new NotImplementedException();
+        public bool IsSheathed { get; private set; }
+        public List<CombatScript> m_CombatScripts;
+        private AudioSource m_AudioSource;
 
-    public override void Execute()
-    {
-        HandleWeaponSheath();
-    }
-
-    /// <summary>
-    /// Not implemented
-    /// </summary>
-    public override void OnWeaponSheath()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void PostExecute()
-    {
-        m_HoldTime -= Time.deltaTime;
-    }
-
-    private void HandleWeaponSheath()
-    {
-        if (m_HoldTime > 0)
+        public Sheath(Animator animator, List<CombatScript> combatScripts, AudioSource audioSource, Combat combat) : base(animator, combat)
         {
-            return;
+            m_CombatScripts = combatScripts;
+            m_AudioSource = audioSource;
         }
-        if (m_InputHandler.GetSheath())
+
+        public override void Execute()
         {
-            Player.Instance.ActorData.CharacterStats.InCombat = !Player.Instance.ActorData.CharacterStats.InCombat;
-            foreach(var combatScript in m_CombatScripts)
+            HandleWeaponSheath();
+        }
+
+        /// <summary>
+        /// Not implemented
+        /// </summary>
+        public override void OnWeaponSheath()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void PostExecute()
+        {
+            m_HoldTime -= Time.deltaTime;
+        }
+
+        private void HandleWeaponSheath()
+        {
+            if (m_HoldTime > 0)
             {
-                combatScript.OnWeaponSheath();
+                return;
             }
-            m_AudioSource.Play();
-            m_HoldTime = 0.25f;
+            if (m_InputHandler.GetSheath())
+            {
+                Player.Instance.ActorData.CharacterStats.InCombat = !Player.Instance.ActorData.CharacterStats.InCombat;
+                foreach (var combatScript in m_CombatScripts)
+                {
+                    combatScript.OnWeaponSheath();
+                }
+                m_AudioSource.Play();
+                m_HoldTime = 0.25f;
+            }
         }
     }
 }

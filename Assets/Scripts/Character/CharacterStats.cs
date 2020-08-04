@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForgottenLegends.Combat;
+using System;
 using UnityEngine;
 
 namespace ForgottenLegends.Character

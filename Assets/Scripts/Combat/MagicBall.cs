@@ -1,16 +1,19 @@
 ﻿using ForgottenLegends.Character;
 using UnityEngine;
 
-public class MagicBall : MonoBehaviour
+namespace ForgottenLegends.Combat
 {
-    public MagicSpell magicSpell;
-
-    private void OnTriggerEnter(Collider collision)
+    public class MagicBall : MonoBehaviour
     {
-        if (collision.gameObject.TryGetComponent<NPC>(out NPC npc))
+        public MagicSpell magicSpell;
+
+        private void OnTriggerEnter(Collider collision)
         {
-            magicSpell.OnTouchSpell(npc);
-            Destroy(gameObject);
+            if (collision.gameObject.TryGetComponent(out NPC npc))
+            {
+                magicSpell.OnTouchSpell(npc);
+                Destroy(gameObject);
+            }
         }
     }
 }

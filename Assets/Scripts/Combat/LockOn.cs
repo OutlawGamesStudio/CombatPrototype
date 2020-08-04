@@ -2,92 +2,95 @@
 using System;
 using UnityEngine;
 
-public class LockOn : CombatScript
+namespace ForgottenLegends.Combat
 {
-    public override WeaponType WeaponType => throw new NotImplementedException();
-    private NPC m_LockOnTarget;
-    private Transform m_Transform;
-
-    public LockOn(Animator animator, Transform transform, Combat combat) : base(animator, combat)
+    public class LockOn : CombatScript
     {
-        m_Transform = transform;
-    }
+        public override WeaponType WeaponType => throw new NotImplementedException();
+        private NPC m_LockOnTarget;
+        private Transform m_Transform;
 
-    public override void Execute()
-    {
-        HandleLockOn();
-    }
-
-    /// <summary>
-    /// Not implemented
-    /// </summary>
-    public override void OnWeaponSheath()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void PostExecute()
-    {
-        if (m_HoldTime > 0)
+        public LockOn(Animator animator, Transform transform, Combat combat) : base(animator, combat)
         {
-            m_HoldTime -= Time.deltaTime;
+            m_Transform = transform;
         }
-    }
 
-    private void HandleLockOn()
-    {
-        if (m_HoldTime > 0)
+        public override void Execute()
         {
-            return;
+            HandleLockOn();
         }
-        if (m_LockOnTarget != null && m_LockOnTarget.ActorData.CharacterStats.IsDead == true)
+
+        /// <summary>
+        /// Not implemented
+        /// </summary>
+        public override void OnWeaponSheath()
         {
-            DisableLockOn();
+            throw new NotImplementedException();
         }
-        if (m_InputHandler.GetLockOn())
+
+        public override void PostExecute()
         {
-            if (m_LockOnTarget != null)
+            if (m_HoldTime > 0)
             {
-                m_LockOnTarget = null;
-                DisableLockOn();
-                m_HoldTime = 0.25f;
+                m_HoldTime -= Time.deltaTime;
+            }
+        }
+
+        private void HandleLockOn()
+        {
+            if (m_HoldTime > 0)
+            {
                 return;
             }
-
-            NPC[] npcs = GameObject.FindObjectsOfType<NPC>();
-            float distance = 100f;
-            NPC closestNPC = null;
-            foreach (var npc in npcs)
+            if (m_LockOnTarget != null && m_LockOnTarget.ActorData.CharacterStats.IsDead == true)
             {
-                float dist = Vector3.Distance(npc.transform.position, m_Transform.position);
-                if (dist < distance && npc.ActorData.CharacterStats.IsDead == false)
-                {
-                    distance = dist;
-                    closestNPC = npc;
-                }
+                DisableLockOn();
             }
-            if (closestNPC != null && m_LockOnTarget != closestNPC)
+            if (m_InputHandler.GetLockOn())
             {
-                if (closestNPC.ActorData.CharacterStats.IsBoss)
+                if (m_LockOnTarget != null)
                 {
-                    BossUI.Instance.AssignBoss(closestNPC);
+                    m_LockOnTarget = null;
+                    DisableLockOn();
+                    m_HoldTime = 0.25f;
+                    return;
                 }
-                else
+
+                NPC[] npcs = UnityEngine.Object.FindObjectsOfType<NPC>();
+                float distance = 100f;
+                NPC closestNPC = null;
+                foreach (var npc in npcs)
                 {
-                    BossUI.Instance.AssignBoss(null);
+                    float dist = Vector3.Distance(npc.transform.position, m_Transform.position);
+                    if (dist < distance && npc.ActorData.CharacterStats.IsDead == false)
+                    {
+                        distance = dist;
+                        closestNPC = npc;
+                    }
                 }
-                CameraController.Instance.LockOn(closestNPC);
+                if (closestNPC != null && m_LockOnTarget != closestNPC)
+                {
+                    if (closestNPC.ActorData.CharacterStats.IsBoss)
+                    {
+                        BossUI.Instance.AssignBoss(closestNPC);
+                    }
+                    else
+                    {
+                        BossUI.Instance.AssignBoss(null);
+                    }
+                    CameraController.Instance.LockOn(closestNPC);
+                }
+
+                m_LockOnTarget = closestNPC;
+                m_HoldTime = 0.25f;
             }
 
-            m_LockOnTarget = closestNPC;
-            m_HoldTime = 0.25f;
         }
 
-    }
-
-    private void DisableLockOn()
-    {
-        CameraController.Instance.LockOff();
-        BossUI.Instance.AssignBoss(null);
+        private void DisableLockOn()
+        {
+            CameraController.Instance.LockOff();
+            BossUI.Instance.AssignBoss(null);
+        }
     }
 }

@@ -1,30 +1,33 @@
 ﻿using UnityEngine;
 
-public abstract class CombatScript
+namespace ForgottenLegends.Combat
 {
-    public abstract WeaponType WeaponType { get; }
-    protected InputHandler m_InputHandler;
-    protected AttackType m_AttackType;
-    protected Animator m_Animator;
-    protected AudioClip m_Unsheath;
-    protected AudioClip m_Sheath;
-    protected float m_HoldTime;
-    protected AnimationScript m_CombatHandler;
-
-    protected CombatScript(Animator animator, AnimationScript combatHandler)
+    public abstract class CombatScript
     {
-        m_CombatHandler = combatHandler;
-        m_InputHandler = InputHandler.Instance;
-        m_Animator = animator;
-        ResetTime();
-    }
+        public abstract WeaponType WeaponType { get; }
+        protected InputHandler m_InputHandler;
+        protected AttackType m_AttackType;
+        protected Animator m_Animator;
+        protected AudioClip m_Unsheath;
+        protected AudioClip m_Sheath;
+        protected float m_HoldTime;
+        protected AnimationScript m_CombatHandler;
 
-    protected void ResetTime()
-    {
-        m_HoldTime = 0;
-    }
+        protected CombatScript(Animator animator, AnimationScript combatHandler)
+        {
+            m_CombatHandler = combatHandler;
+            m_InputHandler = InputHandler.Instance;
+            m_Animator = animator;
+            ResetTime();
+        }
 
-    public abstract void OnWeaponSheath();
-    public abstract void Execute();
-    public abstract void PostExecute();
+        protected void ResetTime()
+        {
+            m_HoldTime = 0;
+        }
+
+        public abstract void OnWeaponSheath();
+        public abstract void Execute();
+        public abstract void PostExecute();
+    }
 }

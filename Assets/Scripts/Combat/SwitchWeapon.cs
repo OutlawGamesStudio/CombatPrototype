@@ -1,36 +1,39 @@
 ﻿using System;
 using UnityEngine;
 
-public class SwitchWeapon : CombatScript
+namespace ForgottenLegends.Combat
 {
-    public override WeaponType WeaponType => throw new NotImplementedException();
-    private WeaponType m_CurrentWeaponType;
-
-    public SwitchWeapon(Animator animator, Combat combat) : base(animator, combat)
+    public class SwitchWeapon : CombatScript
     {
+        public override WeaponType WeaponType => throw new NotImplementedException();
+        private WeaponType m_CurrentWeaponType;
 
-    }
-
-    public override void Execute()
-    {
-        if(m_InputHandler.MouseScroll < -0.1f && m_CurrentWeaponType > WeaponType.Fists)
+        public SwitchWeapon(Animator animator, Combat combat) : base(animator, combat)
         {
-            m_CurrentWeaponType--;
+
         }
-        if (m_InputHandler.MouseScroll > 0.1f && m_CurrentWeaponType < WeaponType.Spear)
+
+        public override void Execute()
         {
-            m_CurrentWeaponType++;
+            if (m_InputHandler.MouseScroll < -0.1f && m_CurrentWeaponType > WeaponType.Fists)
+            {
+                m_CurrentWeaponType--;
+            }
+            if (m_InputHandler.MouseScroll > 0.1f && m_CurrentWeaponType < WeaponType.Spear)
+            {
+                m_CurrentWeaponType++;
+            }
+            Combat.SetWeaponType(m_CurrentWeaponType);
         }
-        Combat.SetWeaponType(m_CurrentWeaponType);
-    }
 
-    public override void OnWeaponSheath()
-    {
-        throw new NotImplementedException();
-    }
+        public override void OnWeaponSheath()
+        {
+            throw new NotImplementedException();
+        }
 
-    public override void PostExecute()
-    {
-        throw new NotImplementedException();
+        public override void PostExecute()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
