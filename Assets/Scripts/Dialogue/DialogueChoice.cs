@@ -1,7 +1,10 @@
 ﻿using System;
 
-[Serializable]
-public class DialogueChoice
+namespace ForgottenLegends.Dialogue
 {
-    public Dialogue ChoiceDialogue;
+    [Serializable]
+    public class DialogueChoice
+    {
+        public Dialogue ChoiceDialogue;
+    }
 }

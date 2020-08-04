@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ForgottenLegends.Dialogue;
+using UnityEngine;
 
 namespace ForgottenLegends.Character
 {
