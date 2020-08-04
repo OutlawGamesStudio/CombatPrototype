@@ -1,4 +1,5 @@
 ﻿using ForgottenLegends.Core;
+using ForgottenLegends.Utility;
 using UnityEngine;
 
 namespace ForgottenLegends.Combat

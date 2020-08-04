@@ -1,5 +1,6 @@
 ﻿using ForgottenLegends.Character;
 using ForgottenLegends.Core;
+using ForgottenLegends.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;

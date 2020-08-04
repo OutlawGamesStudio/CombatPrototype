@@ -1,4 +1,5 @@
 ﻿using ForgottenLegends.Character;
+using ForgottenLegends.Utility;
 using System.Collections.Generic;
 using UnityEngine;
 
