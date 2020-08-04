@@ -1545,24 +1545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3dd858a97bcd408fb39ede5ea5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterStats:
-    CharacterID: 0
-    Name: Boss
-    IsDead: 0
-    Level: 3
-    MaxHealth: 0
-    CurrentHealth: 0
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    IsBoss: 1
-    CharacterType: 1
-    InCombat: 0
-    MaxMana: 0
-    CurrentMana: 0
-    CombatStyle: 0
-    AnimationType: 0
-  m_StateMachine: {fileID: 0}
-  ActorDialogue: {fileID: 0}
+  ActorData: {fileID: 0}
 --- !u!195 &285622711
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2039,25 +2022,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236780d91728f6847b3115e602733518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Settings:
-    language: 
-    antiAliasing: 0
-    textureQuality: 0
-    lodDistance: 0
-    shadowResolution: 0
-    shadowDistance: 0
-    vsyncCount: 0
-    softParticles: 0
-    ansioFiltering: 0
-    borderless: 0
-    fullscreen: 0
-    width: 0
-    height: 0
-    masterVolume: 0
-    musicVolume: 0
-    sfxVolume: 0
-    ambienceVolume: 0
-    scriptUpdateInterval: 0
 --- !u!4 &321609500
 Transform:
   m_ObjectHideFlags: 0
@@ -3455,24 +3419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3dd858a97bcd408fb39ede5ea5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterStats:
-    CharacterID: 0
-    Name: NPC
-    IsDead: 0
-    Level: 2
-    MaxHealth: 99
-    CurrentHealth: 99
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    IsBoss: 0
-    CharacterType: 0
-    InCombat: 0
-    MaxMana: 0
-    CurrentMana: 0
-    CombatStyle: 0
-    AnimationType: 0
-  m_StateMachine: {fileID: 0}
-  ActorDialogue: {fileID: 11400000, guid: 594fb047a7d17a24ba2bc3cee617f820, type: 2}
+  ActorData: {fileID: 11400000, guid: 14d8bc329734c6b40a4d112be32d9cc2, type: 2}
 --- !u!195 &542805286
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3958,24 +3905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3dd858a97bcd408fb39ede5ea5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterStats:
-    CharacterID: 0
-    Name: Enemy
-    IsDead: 0
-    Level: 2
-    MaxHealth: 99
-    CurrentHealth: 99
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    IsBoss: 0
-    CharacterType: 1
-    InCombat: 0
-    MaxMana: 0
-    CurrentMana: 0
-    CombatStyle: 0
-    AnimationType: 2
-  m_StateMachine: {fileID: 0}
-  ActorDialogue: {fileID: 0}
+  ActorData: {fileID: 11400000, guid: 779ea492bbba87a4b8f611cb4a388f10, type: 2}
 --- !u!114 &602577824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12059,22 +11989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bfa824b8e9a45439bd3dd2cc74011e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterStats:
-    CharacterID: 0
-    Name: 
-    IsDead: 0
-    Level: 0
-    MaxHealth: 0
-    CurrentHealth: 0
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    IsBoss: 0
-    CharacterType: 0
-    InCombat: 0
-    MaxMana: 0
-    CurrentMana: 0
-    CombatStyle: 0
-    AnimationType: 1
+  ActorData: {fileID: 0}
 --- !u!4 &1031632035039575624
 Transform:
   m_ObjectHideFlags: 0
