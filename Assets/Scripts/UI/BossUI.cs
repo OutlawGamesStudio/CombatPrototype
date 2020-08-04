@@ -3,45 +3,48 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossUI : Singleton<BossUI>
+namespace ForgottenLegends.UI
 {
-    [SerializeField] private GameObject m_BossUI = null;
-    [SerializeField] private Scrollbar m_BossHealth = null;
-    [SerializeField] private TextMeshProUGUI m_BossName = null;
-    private NPC m_BossNPC;
-
-    public void AssignBoss(NPC bossNPC)
+    public class BossUI : Singleton<BossUI>
     {
-        if(bossNPC == null)
+        [SerializeField] private GameObject m_BossUI = null;
+        [SerializeField] private Scrollbar m_BossHealth = null;
+        [SerializeField] private TextMeshProUGUI m_BossName = null;
+        private NPC m_BossNPC;
+
+        public void AssignBoss(NPC bossNPC)
         {
-            m_BossUI.SetActive(false);
-            return;
+            if (bossNPC == null)
+            {
+                m_BossUI.SetActive(false);
+                return;
+            }
+            m_BossNPC = bossNPC;
+            SetBossName(bossNPC.ActorData.CharacterStats.Name);
+            SetBossHealth(bossNPC.ActorData.CharacterStats.CurrentHealth, bossNPC.ActorData.CharacterStats.MaxHealth);
+            m_BossUI.SetActive(true);
         }
-        m_BossNPC = bossNPC;
-        SetBossName(bossNPC.ActorData.CharacterStats.Name);
-        SetBossHealth(bossNPC.ActorData.CharacterStats.CurrentHealth, bossNPC.ActorData.CharacterStats.MaxHealth);
-        m_BossUI.SetActive(true);
-    }
 
-    private void Update()
-    {
-        if(m_BossNPC == null)
+        private void Update()
         {
-            return;
+            if (m_BossNPC == null)
+            {
+                return;
+            }
+            if (m_BossNPC.ActorData.CharacterStats.CurrentHealth != m_BossHealth.size)
+            {
+                SetBossHealth(m_BossNPC.ActorData.CharacterStats.CurrentHealth, m_BossNPC.ActorData.CharacterStats.MaxHealth);
+            }
         }
-        if(m_BossNPC.ActorData.CharacterStats.CurrentHealth != m_BossHealth.size)
+
+        private void SetBossName(string bossName)
         {
-            SetBossHealth(m_BossNPC.ActorData.CharacterStats.CurrentHealth, m_BossNPC.ActorData.CharacterStats.MaxHealth);
+            m_BossName.text = bossName;
         }
-    }
 
-    private void SetBossName(string bossName)
-    {
-        m_BossName.text = bossName;
-    }
-
-    private void SetBossHealth(float bossHealth, float maxHealth)
-    {
-        m_BossHealth.size = bossHealth / maxHealth;
+        private void SetBossHealth(float bossHealth, float maxHealth)
+        {
+            m_BossHealth.size = bossHealth / maxHealth;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ForgottenLegends.Character;
 using ForgottenLegends.Core;
+using ForgottenLegends.UI;
 using System;
 using UnityEngine;
 
