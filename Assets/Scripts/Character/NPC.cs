@@ -1,4 +1,5 @@
 ﻿using ForgottenLegends.AI;
+using ForgottenLegends.Animation;
 using UnityEngine;
 
 [RequireComponent(typeof(NPCAnimator), typeof(StateMachine), typeof(NpcCombat))]

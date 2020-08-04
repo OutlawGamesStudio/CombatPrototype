@@ -1,129 +1,132 @@
 ﻿using UnityEngine;
 
-public class CharacterAnimator : AnimationScript
+namespace ForgottenLegends.Animation
 {
-    protected const float MOVE_LIMIT = 1f;
-
-    public float PauseMovement { get; private set; }
-    public Vector2 CharacterMovementVelocity { get; protected set; } = new Vector2();
-
-    protected override void Start()
+    public class CharacterAnimator : AnimationScript
     {
-        base.Start();
-    }
+        protected const float MOVE_LIMIT = 1f;
 
-    protected virtual void Update()
-    {
-        HandleMovement();
-        HandleMovementPause();
-    }
+        public float PauseMovement { get; private set; }
+        public Vector2 CharacterMovementVelocity { get; protected set; } = new Vector2();
 
-    protected void SetPauseMovement(float time)
-    {
-        PauseMovement = time;
-    }
-
-    protected virtual void HandleMovement()
-    {
-        // If PauseMovement time is above 0, then skip this method.
-        if (PauseMovement > 0)
+        protected override void Start()
         {
-            return;
+            base.Start();
         }
 
-        UpdateVelocityX();
-        UpdateVelocityY();
-        UpdateMovement();
-    }
-
-    private void HandleMovementPause()
-    {
-        if (PauseMovement > 0)
+        protected virtual void Update()
         {
-            m_Animator.SetFloat("VelocityX", 0.0f);
-            m_Animator.SetFloat("VelocityY", 0.0f);
-            PauseMovement -= Time.deltaTime;
-            if (PauseMovement < 0)
+            HandleMovement();
+            HandleMovementPause();
+        }
+
+        protected void SetPauseMovement(float time)
+        {
+            PauseMovement = time;
+        }
+
+        protected virtual void HandleMovement()
+        {
+            // If PauseMovement time is above 0, then skip this method.
+            if (PauseMovement > 0)
             {
-                PauseMovement = 0;
+                return;
+            }
+
+            UpdateVelocityX();
+            UpdateVelocityY();
+            UpdateMovement();
+        }
+
+        private void HandleMovementPause()
+        {
+            if (PauseMovement > 0)
+            {
+                m_Animator.SetFloat("VelocityX", 0.0f);
+                m_Animator.SetFloat("VelocityY", 0.0f);
+                PauseMovement -= Time.deltaTime;
+                if (PauseMovement < 0)
+                {
+                    PauseMovement = 0;
+                }
             }
         }
-    }
 
-    public void SetMovementVelocity(float movementVelocityX, float movementVelocityY)
-    {
-        Vector2 movementVelocity = new Vector2(movementVelocityX, movementVelocityY);
-        SetMovementVelocity(movementVelocity);
-    }
-
-    public void SetMovementVelocity(Vector2 movementVelocity)
-    {
-        CharacterMovementVelocity = movementVelocity;
-    }
-
-    protected virtual void UpdateMovement()
-    {
-        if (CharacterMovementVelocity.x != 0.0f || CharacterMovementVelocity.y != 0.0f)
+        public void SetMovementVelocity(float movementVelocityX, float movementVelocityY)
         {
-            m_Animator.SetBool("Moving", true);
+            Vector2 movementVelocity = new Vector2(movementVelocityX, movementVelocityY);
+            SetMovementVelocity(movementVelocity);
         }
-        else m_Animator.SetBool("Moving", false);
-    }
 
-    private void UpdateVelocityX()
-    {
-        float velX = m_Animator.GetFloat("VelocityX");
-        if (CharacterMovementVelocity.x > velX)
+        public void SetMovementVelocity(Vector2 movementVelocity)
         {
-            velX += Time.deltaTime;
-            if (velX > CharacterMovementVelocity.x)
+            CharacterMovementVelocity = movementVelocity;
+        }
+
+        protected virtual void UpdateMovement()
+        {
+            if (CharacterMovementVelocity.x != 0.0f || CharacterMovementVelocity.y != 0.0f)
             {
-                velX = CharacterMovementVelocity.x;
+                m_Animator.SetBool("Moving", true);
             }
-            m_Animator.SetFloat("VelocityX", velX);
+            else m_Animator.SetBool("Moving", false);
         }
 
-        if (CharacterMovementVelocity.x < velX)
+        private void UpdateVelocityX()
         {
-            velX -= Time.deltaTime;
-            if (velX < CharacterMovementVelocity.x)
+            float velX = m_Animator.GetFloat("VelocityX");
+            if (CharacterMovementVelocity.x > velX)
             {
-                velX = CharacterMovementVelocity.x;
+                velX += Time.deltaTime;
+                if (velX > CharacterMovementVelocity.x)
+                {
+                    velX = CharacterMovementVelocity.x;
+                }
+                m_Animator.SetFloat("VelocityX", velX);
             }
-            m_Animator.SetFloat("VelocityX", velX);
-        }
-    }
 
-    private void UpdateVelocityY()
-    {
-        float velY = m_Animator.GetFloat("VelocityY");
-        if (CharacterMovementVelocity.y > velY)
-        {
-            velY += Time.deltaTime;
-            if (velY > CharacterMovementVelocity.y)
+            if (CharacterMovementVelocity.x < velX)
             {
-                velY = CharacterMovementVelocity.y;
+                velX -= Time.deltaTime;
+                if (velX < CharacterMovementVelocity.x)
+                {
+                    velX = CharacterMovementVelocity.x;
+                }
+                m_Animator.SetFloat("VelocityX", velX);
             }
-            m_Animator.SetFloat("VelocityY", velY);
         }
 
-        if (CharacterMovementVelocity.y < velY)
+        private void UpdateVelocityY()
         {
-            velY -= Time.deltaTime;
-            if (velY < CharacterMovementVelocity.y)
+            float velY = m_Animator.GetFloat("VelocityY");
+            if (CharacterMovementVelocity.y > velY)
             {
-                velY = CharacterMovementVelocity.y;
+                velY += Time.deltaTime;
+                if (velY > CharacterMovementVelocity.y)
+                {
+                    velY = CharacterMovementVelocity.y;
+                }
+                m_Animator.SetFloat("VelocityY", velY);
             }
-            m_Animator.SetFloat("VelocityY", velY);
-        }
-    }
 
-    public void PlayAnimation(string animation, bool pause = false)
-    {
-        if(pause)
-        {
-            SetPauseMovement(0.5f);
+            if (CharacterMovementVelocity.y < velY)
+            {
+                velY -= Time.deltaTime;
+                if (velY < CharacterMovementVelocity.y)
+                {
+                    velY = CharacterMovementVelocity.y;
+                }
+                m_Animator.SetFloat("VelocityY", velY);
+            }
         }
-        PlayAnimation(animation);
+
+        public void PlayAnimation(string animation, bool pause = false)
+        {
+            if (pause)
+            {
+                SetPauseMovement(0.5f);
+            }
+            PlayAnimation(animation);
+        }
     }
 }
