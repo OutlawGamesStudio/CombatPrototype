@@ -25,7 +25,7 @@ public class NPC : Actor
             if(m_StateMachine.CurrentState == null || m_StateMachine.CurrentState.GetType() != typeof(AiCombat))
             {
                 AiCombat aiCombat = ScriptableObject.CreateInstance<AiCombat>();
-                aiCombat.InitiateCombat(NPCCombat, CharacterStats.CombatStyle, Player.Instance);
+                aiCombat.InitiateCombat(NPCCombat, ActorData.CharacterStats.CombatStyle, Player.Instance);
                 m_StateMachine.SetCurrentState(aiCombat);
                 return;
             }

@@ -44,7 +44,7 @@ public class Sheath : CombatScript
         }
         if (m_InputHandler.GetSheath())
         {
-            Player.Instance.CharacterStats.InCombat = !Player.Instance.CharacterStats.InCombat;
+            Player.Instance.ActorData.CharacterStats.InCombat = !Player.Instance.ActorData.CharacterStats.InCombat;
             foreach(var combatScript in m_CombatScripts)
             {
                 combatScript.OnWeaponSheath();

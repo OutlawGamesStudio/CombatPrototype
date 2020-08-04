@@ -20,7 +20,7 @@ public class AiCombat : AiState
 
     private bool IsTargetDead()
     {
-        if (TargetActor.CharacterStats.CurrentHealth <= 0 || TargetActor.CharacterStats.IsDead == true)
+        if (TargetActor.ActorData.CharacterStats.CurrentHealth <= 0 || TargetActor.ActorData.CharacterStats.IsDead == true)
         {
             return true;
         }

@@ -15,7 +15,7 @@ public class Player : Actor
 
     protected override void Update()
     {
-        CharacterStats.Position = transform.position;
-        CharacterStats.Rotation = transform.rotation;
+        ActorData.CharacterStats.Position = transform.position;
+        ActorData.CharacterStats.Rotation = transform.rotation;
     }
 }

@@ -28,12 +28,12 @@ public abstract class CoreMusic : MonoBehaviour
         NPC nearestEnemy = null;
         foreach (var npc in npcs)
         {
-            if (npc.CharacterStats.IsDead == true)
+            if (npc.ActorData.CharacterStats.IsDead == true)
             {
                 continue;
             }
 
-            if (npc.CharacterStats.CharacterType != CharacterType.Enemy)
+            if (npc.ActorData.CharacterStats.CharacterType != CharacterType.Enemy)
             {
                 continue;
             }

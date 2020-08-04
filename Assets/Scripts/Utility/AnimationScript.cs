@@ -21,7 +21,7 @@ public abstract class AnimationScript : MonoBehaviour
 
     public void AssignActorCombatAnimations(Actor actor)
     {
-        string folderName = $"Combat/{actor.CharacterStats.AnimationType}";
+        string folderName = $"Combat/{actor.ActorData.CharacterStats.AnimationType}";
         Debug.Log("Loading actor combat animations from " + folderName);
         m_CombatAnimations = Resources.LoadAll<CombatAnimation>(folderName);
     }

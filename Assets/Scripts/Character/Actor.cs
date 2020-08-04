@@ -3,43 +3,43 @@
 public class Actor : MonoBehaviour
 {
     private const float BASE_HEALTH = 100f;
-    public CharacterStats CharacterStats;
+    public ActorData ActorData;
 
     protected virtual void Start()
     {
-        if (CharacterStats.Level < 1)
+        if (ActorData.CharacterStats.Level < 1)
         {
-            CharacterStats.Level = 1;
+            ActorData.CharacterStats.Level = 1;
         }
-        if (CharacterStats.IsBoss)
+        if (ActorData.CharacterStats.IsBoss)
         {
-            CharacterStats.MaxHealth = (BASE_HEALTH * 2.0f) * CharacterStats.Level;
+            ActorData.CharacterStats.MaxHealth = (BASE_HEALTH * 2.0f) * ActorData.CharacterStats.Level;
         }
         else
         {
-            CharacterStats.MaxHealth = (BASE_HEALTH * 1.25f) * CharacterStats.Level;
+            ActorData.CharacterStats.MaxHealth = (BASE_HEALTH * 1.25f) * ActorData.CharacterStats.Level;
         }
-        CharacterStats.CurrentHealth = CharacterStats.MaxHealth;
+        ActorData.CharacterStats.CurrentHealth = ActorData.CharacterStats.MaxHealth;
     }
 
     protected virtual void Update()
     {
-        CharacterStats.Position = transform.position;
-        CharacterStats.Rotation = transform.rotation;
+        ActorData.CharacterStats.Position = transform.position;
+        ActorData.CharacterStats.Rotation = transform.rotation;
     }
 
     public virtual void OnWeaponDamage(float damage)
     {
-        if(CharacterStats.IsDead == true)
+        if(ActorData.CharacterStats.IsDead == true)
         {
             return;
         }
 
-        CharacterStats.CurrentHealth -= damage;
-        if (CharacterStats.CurrentHealth <= 0)
+        ActorData.CharacterStats.CurrentHealth -= damage;
+        if (ActorData.CharacterStats.CurrentHealth <= 0)
         {
-            ScriptManager.Instance.InvokeEvent("OnActorDeath", CharacterStats.CharacterID);
-            CharacterStats.IsDead = true;
+            ScriptManager.Instance.InvokeEvent("OnActorDeath", ActorData.CharacterStats.CharacterID);
+            ActorData.CharacterStats.IsDead = true;
         }
     }
 }

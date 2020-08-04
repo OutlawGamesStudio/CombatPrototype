@@ -17,8 +17,8 @@ public class BossUI : Singleton<BossUI>
             return;
         }
         m_BossNPC = bossNPC;
-        SetBossName(bossNPC.CharacterStats.Name);
-        SetBossHealth(bossNPC.CharacterStats.CurrentHealth, bossNPC.CharacterStats.MaxHealth);
+        SetBossName(bossNPC.ActorData.CharacterStats.Name);
+        SetBossHealth(bossNPC.ActorData.CharacterStats.CurrentHealth, bossNPC.ActorData.CharacterStats.MaxHealth);
         m_BossUI.SetActive(true);
     }
 
@@ -28,9 +28,9 @@ public class BossUI : Singleton<BossUI>
         {
             return;
         }
-        if(m_BossNPC.CharacterStats.CurrentHealth != m_BossHealth.size)
+        if(m_BossNPC.ActorData.CharacterStats.CurrentHealth != m_BossHealth.size)
         {
-            SetBossHealth(m_BossNPC.CharacterStats.CurrentHealth, m_BossNPC.CharacterStats.MaxHealth);
+            SetBossHealth(m_BossNPC.ActorData.CharacterStats.CurrentHealth, m_BossNPC.ActorData.CharacterStats.MaxHealth);
         }
     }
 

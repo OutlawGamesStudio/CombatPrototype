@@ -19,7 +19,7 @@ public class SpearCombat : CombatScript
 
     public override void OnWeaponSheath()
     {
-        if (Player.Instance.CharacterStats.InCombat)
+        if (Player.Instance.ActorData.CharacterStats.InCombat)
         {
             Combat.AudioSource.clip = m_Unsheath;
             m_Animator.CrossFade("Combat Withdraw Sword", 0.1f);

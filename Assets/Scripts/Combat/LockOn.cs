@@ -39,7 +39,7 @@ public class LockOn : CombatScript
         {
             return;
         }
-        if (m_LockOnTarget != null && m_LockOnTarget.CharacterStats.IsDead == true)
+        if (m_LockOnTarget != null && m_LockOnTarget.ActorData.CharacterStats.IsDead == true)
         {
             DisableLockOn();
         }
@@ -59,7 +59,7 @@ public class LockOn : CombatScript
             foreach (var npc in npcs)
             {
                 float dist = Vector3.Distance(npc.transform.position, m_Transform.position);
-                if (dist < distance && npc.CharacterStats.IsDead == false)
+                if (dist < distance && npc.ActorData.CharacterStats.IsDead == false)
                 {
                     distance = dist;
                     closestNPC = npc;
@@ -67,7 +67,7 @@ public class LockOn : CombatScript
             }
             if (closestNPC != null && m_LockOnTarget != closestNPC)
             {
-                if (closestNPC.CharacterStats.IsBoss)
+                if (closestNPC.ActorData.CharacterStats.IsBoss)
                 {
                     BossUI.Instance.AssignBoss(closestNPC);
                 }

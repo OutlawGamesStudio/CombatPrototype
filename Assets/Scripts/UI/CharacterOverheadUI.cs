@@ -35,7 +35,7 @@ public class CharacterOverheadUI : MonoBehaviour
 
     private void EnableHealthIfAble()
     {
-        if (m_NPC.CharacterStats.CurrentHealth <= 0 || Vector3.Distance(m_Player.transform.position, transform.position) > 10f)
+        if (m_NPC.ActorData.CharacterStats.CurrentHealth <= 0 || Vector3.Distance(m_Player.transform.position, transform.position) > 10f)
         {
             m_OverheadUI.SetActive(false);
         }
@@ -51,12 +51,12 @@ public class CharacterOverheadUI : MonoBehaviour
 
     private void UpdateName()
     {
-        m_CharacterName.text = m_NPC.CharacterStats.Name;
+        m_CharacterName.text = m_NPC.ActorData.CharacterStats.Name;
     }
 
     private void UpdateHealth()
     {
-        m_HealthBar.size = m_NPC.CharacterStats.CurrentHealth / m_NPC.CharacterStats.MaxHealth;
+        m_HealthBar.size = m_NPC.ActorData.CharacterStats.CurrentHealth / m_NPC.ActorData.CharacterStats.MaxHealth;
     }
 
     private void FaceCamera()

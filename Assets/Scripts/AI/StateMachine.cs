@@ -23,7 +23,7 @@ public class StateMachine : MonoBehaviour
 
     private void Update()
     {
-        if (m_NPC.CharacterStats.IsDead == true)
+        if (m_NPC.ActorData.CharacterStats.IsDead == true)
         {
             StopPathing();
             return;

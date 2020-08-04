@@ -39,7 +39,7 @@ public class MagicCombat : CombatScript
             MagicSpellCast magic = new MagicSpellCast();
 
             m_LastSpell = m_MagicSpells[m_Index];
-            m_Caster.CharacterStats.CurrentMana -= m_LastSpell.manaCost;
+            m_Caster.ActorData.CharacterStats.CurrentMana -= m_LastSpell.manaCost;
             magic.spellObject = GameObject.Instantiate(m_LastSpell.spellObject);
             magic.spellObject.transform.rotation = Quaternion.Euler(0f, Player.Instance.transform.rotation.eulerAngles.y, 0f);
             magic.spellObject.transform.position = Player.Instance.transform.position;
