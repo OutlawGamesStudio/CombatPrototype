@@ -3,12 +3,11 @@
 [RequireComponent(typeof(NPCAnimator), typeof(StateMachine), typeof(NpcCombat))]
 public class NPC : Actor
 {
-    [SerializeField] private StateMachine m_StateMachine;
+    private StateMachine m_StateMachine;
     public StateMachine StateMachine => m_StateMachine;
 
     public NPCAnimator NPCAnimator { get; private set; }
     public NpcCombat NPCCombat { get; private set; }
-    public ActorDialogue ActorDialogue;
 
     protected override void Start()
     {

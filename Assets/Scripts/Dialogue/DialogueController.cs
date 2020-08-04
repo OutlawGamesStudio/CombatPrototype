@@ -32,14 +32,14 @@ public class DialogueController : MonoBehaviour
         NPC npc = ClosestNPC();
         if (m_InputHandler.GetActivate() && ClosestNPC() != null && m_DialogueChoicesShownTime <= 0)
         {
-            if(npc.ActorDialogue != null && npc.ActorDialogue.Dialogues.Length > 0)
+            if(npc.ActorData.ActorDialogue != null && npc.ActorData.ActorDialogue.Dialogues.Length > 0)
             {
-                for (int i = 0; i < npc.ActorDialogue.Dialogues.Length; i++)
+                for (int i = 0; i < npc.ActorData.ActorDialogue.Dialogues.Length; i++)
                 {
-                    CreateDialogueChoice(npc.ActorDialogue.Dialogues[i]);
+                    CreateDialogueChoice(npc.ActorData.ActorDialogue.Dialogues[i]);
                 }
                 ShowDialogueUI(true);
-                SetDialogueText(npc.ActorDialogue.StartingDialogue.DialogueText);
+                SetDialogueText(npc.ActorData.ActorDialogue.StartingDialogue.DialogueText);
                 m_DialogueChoicesShownTime = 1f;
                 return;
             }
