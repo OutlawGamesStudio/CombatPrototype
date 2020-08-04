@@ -1,29 +1,32 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
-public class CombatMusic : CoreMusic
+namespace ForgottenLegends.Audio
 {
-    protected override void Start()
+    [RequireComponent(typeof(AudioSource))]
+    public class CombatMusic : CoreMusic
     {
-        AudioFolder = "Combat";
-        base.Start();
-    }
-
-    private void Update()
-    {
-        if (!FoundEnemy())
+        protected override void Start()
         {
-            if (m_AudioSource.isPlaying && m_AudioSource.volume > 0)
-            {
-                m_AudioSource.volume -= 0.05f;
-                if (m_AudioSource.volume <= 0)
-                {
-                    m_AudioSource.volume = 0;
-                    m_AudioSource.Stop();
-                }
-            }
-            return;
+            AudioFolder = "Combat";
+            base.Start();
         }
-        PlayMusic();
+
+        private void Update()
+        {
+            if (!FoundEnemy())
+            {
+                if (m_AudioSource.isPlaying && m_AudioSource.volume > 0)
+                {
+                    m_AudioSource.volume -= 0.05f;
+                    if (m_AudioSource.volume <= 0)
+                    {
+                        m_AudioSource.volume = 0;
+                        m_AudioSource.Stop();
+                    }
+                }
+                return;
+            }
+            PlayMusic();
+        }
     }
 }

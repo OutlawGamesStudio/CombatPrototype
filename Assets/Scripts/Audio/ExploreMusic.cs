@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
-public class ExploreMusic : CoreMusic
+namespace ForgottenLegends.Audio
 {
-    protected override void Start()
+    [RequireComponent(typeof(AudioSource))]
+    public class ExploreMusic : CoreMusic
     {
-        AudioFolder = "Explore";
-        base.Start();
-    }
-
-    private void Update()
-    {
-        if(FoundEnemy() && m_AudioSource.isPlaying)
+        protected override void Start()
         {
-            m_AudioSource.Stop();
-            return;
-        }   
-        PlayMusic();
+            AudioFolder = "Explore";
+            base.Start();
+        }
+
+        private void Update()
+        {
+            if (FoundEnemy() && m_AudioSource.isPlaying)
+            {
+                m_AudioSource.Stop();
+                return;
+            }
+            PlayMusic();
+        }
     }
 }
