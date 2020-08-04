@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac85d9f60d5e494492ac4bf5b6f5cbc, type: 3}
+  m_Name: WandererWanderState
+  m_EditorClassIdentifier: 
+  statePriority: 0
+  shouldRepeat: 0
+  shouldReturnToPreviousState: 0
+  startingPosition: {x: -23.997452, y: 5.110664, z: -14.996838}
+  destination: {x: -23.898191, y: 5.098621, z: -14.989877}
+  destinationFound: 1
+  destinationTolerance: 1
+  wanderDistance: 10
+  layerMask: 0

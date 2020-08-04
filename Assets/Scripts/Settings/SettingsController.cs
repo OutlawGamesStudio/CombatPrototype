@@ -23,7 +23,6 @@ namespace ForgottenLegends.Setting
         public static Settings LoadSettings()
         {
             string rootFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.productName, SettingsFile);
-            UnityEngine.Debug.Log($"Loading settings to {rootFile}");
             if (!File.Exists(rootFile))
             {
                 return null;

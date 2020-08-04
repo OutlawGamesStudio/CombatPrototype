@@ -1,4 +1,5 @@
-﻿using ForgottenLegends.Dialogue;
+﻿using ForgottenLegends.AI;
+using ForgottenLegends.Dialogue;
 using UnityEngine;
 
 namespace ForgottenLegends.Character
@@ -8,5 +9,6 @@ namespace ForgottenLegends.Character
     {
         public CharacterStats CharacterStats;
         public ActorDialogue ActorDialogue;
+        public AiState ActorState;
     }
 }

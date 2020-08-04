@@ -17,8 +17,8 @@ MonoBehaviour:
     Name: Enemy
     IsDead: 0
     Level: 1
-    MaxHealth: 100
-    CurrentHealth: 100
+    MaxHealth: 125
+    CurrentHealth: 125
     Position: {x: 0, y: 0, z: 3.5}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     IsBoss: 0
@@ -29,3 +29,4 @@ MonoBehaviour:
     CombatStyle: 0
     AnimationType: 2
   ActorDialogue: {fileID: 0}
+  ActorState: {fileID: 11400000, guid: 2f3b1c186f446ee4cbb983d99974eec8, type: 2}

@@ -34,6 +34,11 @@ namespace ForgottenLegends.AI
 
             if (CurrentState == null)
             {
+                if(m_NPC.ActorData.ActorState != null)
+                {
+                    SetCurrentState(m_NPC.ActorData.ActorState);
+                    return;
+                }
                 SetCurrentState(m_BackupState);
                 return;
             }
