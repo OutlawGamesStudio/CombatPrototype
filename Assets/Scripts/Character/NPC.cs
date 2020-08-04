@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ForgottenLegends.AI;
+using UnityEngine;
 
 [RequireComponent(typeof(NPCAnimator), typeof(StateMachine), typeof(NpcCombat))]
 public class NPC : Actor
