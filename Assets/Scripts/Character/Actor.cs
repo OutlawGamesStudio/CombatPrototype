@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ForgottenLegends.Scripts;
+using UnityEngine;
 
 namespace ForgottenLegends.Character
 {

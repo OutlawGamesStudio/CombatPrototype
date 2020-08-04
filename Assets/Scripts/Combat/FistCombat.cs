@@ -26,7 +26,7 @@ namespace ForgottenLegends.Combat
             }
             if (m_InputHandler.GetAttackUp() && m_HoldTime > MIN_HOLD_TIME)
             {
-                Debug.Log($"Hold time = {m_HoldTime}");
+                UnityEngine.Debug.Log($"Hold time = {m_HoldTime}");
                 StartAttack();
             }
         }

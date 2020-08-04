@@ -52,7 +52,7 @@ namespace ForgottenLegends.Core
                             Day = 1;
                         }
                     }
-                    Debug.Log($"Current Time: {Day}/{Month}/{Year} {Hour}:{Minute}");
+                    UnityEngine.Debug.Log($"Current Time: {Day}/{Month}/{Year} {Hour}:{Minute}");
                 }
             }
         }

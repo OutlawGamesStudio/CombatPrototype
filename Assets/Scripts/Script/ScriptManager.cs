@@ -2,94 +2,91 @@
 using System.IO;
 using UnityEngine;
 
-public struct ScriptCallback
+namespace ForgottenLegends.Scripts
 {
-    public string callbackName;
-    public object[] callbackParamaters;
-}
-
-public class ScriptManager : Singleton<ScriptManager>
-{
-    private LuaVM m_LuaVM;
-    private LuaVM.VMSettings m_VMSettings;
-    public List<Script> m_ScriptFiles = new List<Script>();
-    private float m_CurrentWaitTime;
-
-    [SerializeField] private float m_WaitTime = 0.2f;
-
-    // Start is called before the first frame update
-    void Start()
+    public class ScriptManager : Singleton<ScriptManager>
     {
-        m_WaitTime = SettingsScript.Instance.Settings.scriptUpdateInterval;
-        m_VMSettings = LuaVM.VMSettings.AttachAll;
-        m_LuaVM = new LuaVM(m_VMSettings);
-        if(m_WaitTime < 0.1f)
-        {
-            m_WaitTime = 0.1f;
-        }
+        private LuaVM m_LuaVM;
+        private LuaVM.VMSettings m_VMSettings;
+        public List<Script> m_ScriptFiles = new List<Script>();
+        private float m_CurrentWaitTime;
 
-        // Use forward slashes, even on Windows.
-        string scriptPath = Application.streamingAssetsPath + "/Data/Scripts";
-        string[] scripts = Directory.GetFiles(scriptPath, "*.lua", SearchOption.AllDirectories);
-        foreach(var item in scripts)
+        [SerializeField] private float m_WaitTime = 0.2f;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            Script script = new Script
+            m_WaitTime = SettingsScript.Instance.Settings.scriptUpdateInterval;
+            m_VMSettings = LuaVM.VMSettings.AttachAll;
+            m_LuaVM = new LuaVM(m_VMSettings);
+            if (m_WaitTime < 0.1f)
             {
-                scriptName = Path.GetFileName(item),
-                scriptPath = item
-            };
-            ScriptCallback scriptCallback = new ScriptCallback();
-            scriptCallback.callbackName = "OnStart";
-            RunScript(script, new ScriptCallback[] { scriptCallback });
-            m_ScriptFiles.Add(script);
-        }
-    }
+                m_WaitTime = 0.1f;
+            }
 
-    private void Update()
-    {
-        m_CurrentWaitTime += Time.deltaTime;
-        if (m_CurrentWaitTime > m_WaitTime)
-        {
-            InvokeEvent("OnUpdate");
-            m_CurrentWaitTime = 0;
-        }
-    }
-
-    public void RunScript(Script script, ScriptCallback[] callbacks = null)
-    {
-        if (!File.Exists(script.scriptPath))
-        {
-            Debug.LogError($"Cannot run script {script} as it does not exist.");
-            return;
-        }
-
-        string scriptSource = File.ReadAllText(script.scriptPath);
-        m_LuaVM.ExecuteString(scriptSource);
-        if (callbacks != null)
-        {
-            foreach (var callback in callbacks)
+            // Use forward slashes, even on Windows.
+            string scriptPath = Application.streamingAssetsPath + "/Data/Scripts";
+            string[] scripts = Directory.GetFiles(scriptPath, "*.lua", SearchOption.AllDirectories);
+            foreach (var item in scripts)
             {
-                Internal_InvokeEvent(callback.callbackName, callback.callbackParamaters);
+                Script script = new Script
+                {
+                    scriptName = Path.GetFileName(item),
+                    scriptPath = item
+                };
+                ScriptCallback scriptCallback = new ScriptCallback();
+                scriptCallback.callbackName = "OnStart";
+                RunScript(script, new ScriptCallback[] { scriptCallback });
+                m_ScriptFiles.Add(script);
             }
         }
-    }
 
-    public void InvokeEvent(string eventName, params object[] paramaters)
-    {
-        ScriptCallback scriptCallback = new ScriptCallback();
-        scriptCallback.callbackName = eventName;
-        scriptCallback.callbackParamaters = paramaters;
-        foreach (var item in m_ScriptFiles)
+        private void Update()
         {
-            RunScript(item, new ScriptCallback[] { scriptCallback } );
+            m_CurrentWaitTime += Time.deltaTime;
+            if (m_CurrentWaitTime > m_WaitTime)
+            {
+                InvokeEvent("OnUpdate");
+                m_CurrentWaitTime = 0;
+            }
         }
-    }
 
-    private void Internal_InvokeEvent(string eventName, params object[] paramaters)
-    {
-        if(m_LuaVM.DoesCallExist(eventName) == true)
+        public void RunScript(Script script, ScriptCallback[] callbacks = null)
         {
-            m_LuaVM.Call(eventName, paramaters);
+            if (!File.Exists(script.scriptPath))
+            {
+                UnityEngine.Debug.LogError($"Cannot run script {script} as it does not exist.");
+                return;
+            }
+
+            string scriptSource = File.ReadAllText(script.scriptPath);
+            m_LuaVM.ExecuteString(scriptSource);
+            if (callbacks != null)
+            {
+                foreach (var callback in callbacks)
+                {
+                    Internal_InvokeEvent(callback.callbackName, callback.callbackParamaters);
+                }
+            }
+        }
+
+        public void InvokeEvent(string eventName, params object[] paramaters)
+        {
+            ScriptCallback scriptCallback = new ScriptCallback();
+            scriptCallback.callbackName = eventName;
+            scriptCallback.callbackParamaters = paramaters;
+            foreach (var item in m_ScriptFiles)
+            {
+                RunScript(item, new ScriptCallback[] { scriptCallback });
+            }
+        }
+
+        private void Internal_InvokeEvent(string eventName, params object[] paramaters)
+        {
+            if (m_LuaVM.DoesCallExist(eventName) == true)
+            {
+                m_LuaVM.Call(eventName, paramaters);
+            }
         }
     }
 }

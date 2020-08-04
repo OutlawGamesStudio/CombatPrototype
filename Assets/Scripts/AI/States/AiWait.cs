@@ -18,7 +18,7 @@ namespace ForgottenLegends.AI
             m_StateMachine.StopPathing();
             if (m_CurrentWaitTime >= WaitSeconds)
             {
-                Debug.Log($"Exiting Idle State after {WaitSeconds}");
+                UnityEngine.Debug.Log($"Exiting Idle State after {WaitSeconds}");
                 m_CurrentWaitTime = 0;
                 CompleteState();
                 return;

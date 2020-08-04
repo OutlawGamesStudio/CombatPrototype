@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForgottenLegends.Scripts;
+using System;
 
 namespace ForgottenLegends.Quests
 {

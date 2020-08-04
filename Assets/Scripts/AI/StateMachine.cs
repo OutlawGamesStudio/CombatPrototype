@@ -43,7 +43,7 @@ namespace ForgottenLegends.AI
                 if (ShouldReturnToPreviousState())
                 {
                     SetCurrentState(m_PreviousState);
-                    Debug.Log($"Setting CurrentState to previous state: {CurrentState.name}");
+                    UnityEngine.Debug.Log($"Setting CurrentState to previous state: {CurrentState.name}");
                 }
                 return;
             }

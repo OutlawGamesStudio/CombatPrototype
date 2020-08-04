@@ -28,10 +28,10 @@ namespace ForgottenLegends.Combat
         {
             foreach (var combatScript in m_CombatScripts)
             {
-                Debug.Log($"{combatScript.WeaponType} == {weaponType}: {combatScript.WeaponType == weaponType}");
+                UnityEngine.Debug.Log($"{combatScript.WeaponType} == {weaponType}: {combatScript.WeaponType == weaponType}");
                 if (combatScript.WeaponType == weaponType)
                 {
-                    Debug.Log($"Executing attack with {weaponType}");
+                    UnityEngine.Debug.Log($"Executing attack with {weaponType}");
                     combatScript.Execute();
                     combatScript.PostExecute();
                     break;
