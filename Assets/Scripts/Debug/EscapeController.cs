@@ -4,19 +4,22 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EscapeController : MonoBehaviour
+namespace ForgottenLegends.Debug
 {
-#if UNITY_DEVELOPMENT || UNITY_EDITOR || DEBUG
-    private void Update()
+    public class EscapeController : MonoBehaviour
     {
-        if (Keyboard.current.escapeKey.wasReleasedThisFrame)
+#if UNITY_DEVELOPMENT || UNITY_EDITOR || DEBUG
+        private void Update()
         {
+            if (Keyboard.current.escapeKey.wasReleasedThisFrame)
+            {
 #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
+                EditorApplication.isPlaying = false;
 #else
             Application.Quit();
 #endif
+            }
         }
-    }
 #endif
+    }
 }
