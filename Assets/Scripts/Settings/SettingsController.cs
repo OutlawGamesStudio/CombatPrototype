@@ -23,7 +23,7 @@ namespace ForgottenLegends.Setting
         public static Settings LoadSettings()
         {
             string rootFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.productName, SettingsFile);
-            Debug.Log($"Loading settings to {rootFile}");
+            UnityEngine.Debug.Log($"Loading settings to {rootFile}");
             if (!File.Exists(rootFile))
             {
                 return null;
@@ -84,7 +84,7 @@ namespace ForgottenLegends.Setting
             }
 
             string rootFile = Path.Combine(rootFolder, SettingsFile);
-            Debug.Log($"Saving Settings.ini to {rootFolder}");
+            UnityEngine.Debug.Log($"Saving Settings.ini to {rootFolder}");
             if (!File.Exists(rootFile))
             {
                 File.Create(rootFile).Dispose();
@@ -116,11 +116,6 @@ namespace ForgottenLegends.Setting
             parsedData["Audio"].AddKey("ambienceVolume", settings.ambienceVolume.ToString());
 
             parser.WriteFile(rootFile, parsedData);
-
-            /*using(StreamWriter streamWriter = new StreamWriter(rootFile))
-            {
-                streamWriter.Write()
-            }*/
         }
     }
 }
