@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForgottenLegends.Core;
+using System;
 using UnityEngine;
 
 namespace ForgottenLegends.AI

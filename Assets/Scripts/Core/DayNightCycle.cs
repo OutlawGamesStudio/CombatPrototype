@@ -1,61 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-class DayNightCycle : Singleton<DayNightCycle>
+namespace ForgottenLegends.Core
 {
-    #region Constants
-    public const int GAME_YEAR = 1204;
-    #endregion
-
-    #region Properties
-    public int Day { get; private set; }
-    public int Month { get; private set; }
-    public int Year { get; private set; }
-    public int Hour;
-    public int Minute;
-    #endregion
-
-    #region Variables
-    private float m_CurrentSecond;
-    #endregion
-
-    private void Start()
+    class DayNightCycle : Singleton<DayNightCycle>
     {
-        if(Day < 1)
-        {
-            Day = 1;
-        }
-        if (Year < GAME_YEAR)
-        {
-            Year = GAME_YEAR;
-        }
-    }
+        #region Constants
+        public const int GAME_YEAR = 1204;
+        #endregion
 
-    private void Update()
-    {
-        m_CurrentSecond += Time.deltaTime;
-        if(m_CurrentSecond > 1)
+        #region Properties
+        public int Day { get; private set; }
+        public int Month { get; private set; }
+        public int Year { get; private set; }
+        public int Hour;
+        public int Minute;
+        #endregion
+
+        #region Variables
+        private float m_CurrentSecond;
+        #endregion
+
+        private void Start()
         {
-            m_CurrentSecond = 0;
-            Minute++;
-            if(Minute > 59)
+            if (Day < 1)
             {
-                Minute = 0;
-                Hour++;
-                if(Hour > 23)
+                Day = 1;
+            }
+            if (Year < GAME_YEAR)
+            {
+                Year = GAME_YEAR;
+            }
+        }
+
+        private void Update()
+        {
+            m_CurrentSecond += Time.deltaTime;
+            if (m_CurrentSecond > 1)
+            {
+                m_CurrentSecond = 0;
+                Minute++;
+                if (Minute > 59)
                 {
-                    Hour = 0;
-                    Day++;
-                    if(Day > 7)
+                    Minute = 0;
+                    Hour++;
+                    if (Hour > 23)
                     {
-                        Day = 1;
+                        Hour = 0;
+                        Day++;
+                        if (Day > 7)
+                        {
+                            Day = 1;
+                        }
                     }
+                    Debug.Log($"Current Time: {Day}/{Month}/{Year} {Hour}:{Minute}");
                 }
-                Debug.Log($"Current Time: {Day}/{Month}/{Year} {Hour}:{Minute}");
             }
         }
     }
