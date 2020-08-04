@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Setting;
 
 namespace ForgottenLegends.Scripts
 {

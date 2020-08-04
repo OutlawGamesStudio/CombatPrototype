@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-public class SettingsScript : Singleton<SettingsScript>
+namespace ForgottenLegends.Setting
 {
-    public Settings Settings { get; private set; }
-
-    private void Start()
+    public class SettingsScript : Singleton<SettingsScript>
     {
-        if(SettingsController.DoesSettingsFileExist() == true)
+        public Settings Settings { get; private set; }
+
+        private void Start()
         {
-            Settings = SettingsController.LoadSettings();
-            return;
+            if (SettingsController.DoesSettingsFileExist() == true)
+            {
+                Settings = SettingsController.LoadSettings();
+                return;
+            }
+            DefaultSettings defaultSettings = Resources.Load<DefaultSettings>("DefaultSettings");
+            Settings = defaultSettings.Settings;
+            SettingsController.SaveSettings(Settings);
         }
-        DefaultSettings defaultSettings = Resources.Load<DefaultSettings>("DefaultSettings");
-        Settings = defaultSettings.Settings;
-        SettingsController.SaveSettings(Settings);
     }
 }
