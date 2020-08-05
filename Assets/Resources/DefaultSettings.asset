@@ -31,3 +31,4 @@ MonoBehaviour:
     sfxVolume: 1
     ambienceVolume: 1
     scriptUpdateInterval: 0.2
+    enableScriptDebugging: 1

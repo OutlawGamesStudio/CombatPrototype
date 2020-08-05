@@ -51,14 +51,19 @@ public class LuaVM
     /// Default to attaching all apis and enums
     /// </summary>
     public LuaVM()
-        : this(VMSettings.AttachAll)
+        : this(VMSettings.AttachAll, DefaultDebugLog)
     {
     }
-    
+
+    private static void DefaultDebugLog(string obj)
+    {
+        Debug.Log(obj);
+    }
+
     /// <summary>
     /// Default settings are a soft sandbox and setting up the file system script loader
     /// </summary>
-    public LuaVM(VMSettings vmSettings)
+    public LuaVM(VMSettings vmSettings, Action<string> debugLog)
     {
         m_LuaScript =
             new Script(CoreModules.Preset_SoftSandbox)
@@ -66,7 +71,7 @@ public class LuaVM
                 Options =
                 {
                     ScriptLoader = new FileSystemScriptLoader(),
-                    DebugPrint = log => Debug.Log (log),
+                    DebugPrint = debugLog,
                 }
             };
 

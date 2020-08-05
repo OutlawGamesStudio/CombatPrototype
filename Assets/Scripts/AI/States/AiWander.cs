@@ -51,7 +51,6 @@ namespace ForgottenLegends.AI
             float dist = Vector3.Distance(startingPosition, m_StateMachine.transform.position);
             if (dist > wanderDistance)
             {
-                UnityEngine.Debug.Log($"{m_StateMachine.name} is too far away (distance: {dist} / max distance: {wanderDistance})");
                 return startingPosition;
             }
 
@@ -63,7 +62,6 @@ namespace ForgottenLegends.AI
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
                 {
-                    UnityEngine.Debug.Log($"{m_StateMachine.name} random dest to {hit.position}");
                     return hit.position;
                 }
             }

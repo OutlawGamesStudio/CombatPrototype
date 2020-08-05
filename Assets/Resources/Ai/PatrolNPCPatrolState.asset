@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: PatrolNPCPatrolState
   m_EditorClassIdentifier: 
   statePriority: 0
-  shouldRepeat: 0
+  shouldRepeat: 1
   shouldReturnToPreviousState: 0
   destinationTolerance: 1
-  StartingNode: {fileID: 0}

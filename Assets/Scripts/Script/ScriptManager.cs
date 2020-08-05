@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using ForgottenLegends.Setting;
+using System;
+using ForgottenLegends.Debug;
 
 namespace ForgottenLegends.Scripts
 {
@@ -12,6 +14,7 @@ namespace ForgottenLegends.Scripts
         private LuaVM.VMSettings m_VMSettings;
         public List<Script> m_ScriptFiles = new List<Script>();
         private float m_CurrentWaitTime;
+        private bool m_PrintLogs;
 
         [SerializeField] private float m_WaitTime = 0.2f;
 
@@ -19,8 +22,9 @@ namespace ForgottenLegends.Scripts
         void Start()
         {
             m_WaitTime = SettingsScript.Instance.Settings.scriptUpdateInterval;
+            m_PrintLogs = SettingsScript.Instance.Settings.enableScriptDebugging;
             m_VMSettings = LuaVM.VMSettings.AttachAll;
-            m_LuaVM = new LuaVM(m_VMSettings);
+            m_LuaVM = new LuaVM(m_VMSettings, debugLog);
             if (m_WaitTime < 0.1f)
             {
                 m_WaitTime = 0.1f;
@@ -41,6 +45,11 @@ namespace ForgottenLegends.Scripts
                 RunScript(script, new ScriptCallback[] { scriptCallback });
                 m_ScriptFiles.Add(script);
             }
+        }
+
+        private void debugLog(string obj)
+        {
+            Logging.Log(obj);
         }
 
         private void Update()

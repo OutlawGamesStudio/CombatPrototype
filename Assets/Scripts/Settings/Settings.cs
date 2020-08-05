@@ -30,5 +30,6 @@ namespace ForgottenLegends.Setting
 
         // Script settings
         public float scriptUpdateInterval;
+        public bool enableScriptDebugging;
     }
 }

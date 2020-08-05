@@ -10,6 +10,16 @@ namespace ForgottenLegends.Setting
     {
         public static readonly string SettingsFile = "Settings.ini";
 
+        public static string GetSettingsFolder()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.productName);
+        }
+
+        public static string GetSettingsFile()
+        {
+            return Path.Combine(GetSettingsFolder(), SettingsFile);
+        }
+
         public static bool DoesSettingsFileExist()
         {
             string rootFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.productName, SettingsFile);
@@ -30,6 +40,8 @@ namespace ForgottenLegends.Setting
             var parser = new FileIniDataParser();
             IniData data = parser.ReadFile(rootFile);
             string language = data["General"]["language"];
+            string updtIntrvl = data["General"]["scriptUpdateInterval"];
+            string dbg = data["General"]["enableScriptDebugging"];
             string aaLevel = data["Graphics"]["antiAliasing"];
             string txtrQlty = data["Graphics"]["textureQuality"];
             string lodDist = data["Graphics"]["lodDistance"];
@@ -53,12 +65,16 @@ namespace ForgottenLegends.Setting
             bool ansioFiltering = bool.Parse(ansio);
             bool borderless = bool.Parse(brdrlss);
             bool fullscreen = bool.Parse(fllscrn);
+            float updateInterval = float.Parse(updtIntrvl);
+            bool debug = bool.Parse(dbg);
             int width = int.Parse(wdth);
             int height = int.Parse(hght);
 
 
             Settings settings = new Settings();
             settings.language = language;
+            settings.scriptUpdateInterval = updateInterval;
+            settings.enableScriptDebugging = debug;
             settings.antiAliasing = antialiasing;
             settings.textureQuality = textureQuality;
             settings.lodDistance = lodDistance;
@@ -93,6 +109,7 @@ namespace ForgottenLegends.Setting
             parsedData.Sections.AddSection("General");
             parsedData["General"].AddKey("language", settings.language);
             parsedData["General"].AddKey("scriptUpdateInterval", settings.scriptUpdateInterval.ToString());
+            parsedData["General"].AddKey("enableScriptDebugging", settings.enableScriptDebugging.ToString());
 
             parsedData.Sections.AddSection("Graphics");
             parsedData["Graphics"].AddKey("antiAliasing", settings.antiAliasing.ToString("d"));
