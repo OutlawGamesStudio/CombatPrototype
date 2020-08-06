@@ -3,7 +3,7 @@
 namespace ForgottenLegends.AI
 {
     [CreateAssetMenu(fileName = "TravelState", menuName = "AI/States/Travel")]
-    public class AiTravel : AiState
+    public class AiTravel : AiScriptableState
     {
         public Vector3 destination;
         public float destinationTolerance = 1f;

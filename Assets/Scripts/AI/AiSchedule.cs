@@ -8,7 +8,7 @@ namespace ForgottenLegends.AI
     {
         public List<AiScheduleType> aiSchedule;
 
-        public AiState GetNextState()
+        public AiScriptableState GetNextState()
         {
             if (aiSchedule == null || aiSchedule.Count < 1)
             {

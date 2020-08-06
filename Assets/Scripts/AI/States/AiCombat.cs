@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ForgottenLegends.AI
 {
     [CreateAssetMenu(fileName = "CombatState", menuName = "AI/States/Combat")]
-    public class AiCombat : AiState
+    public class AiCombat : AiScriptableState
     {
         public Actor TargetActor;
         public float destinationTolerance = 1f;

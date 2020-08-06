@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ForgottenLegends.AI
 {
     [CreateAssetMenu(fileName = "PatrolState", menuName = "AI/States/Patrol")]
-    public class AiPatrol : AiState
+    public class AiPatrol : AiScriptableState
     {
         public float destinationTolerance = 1f;
         private PatrolNode m_StartingNode;

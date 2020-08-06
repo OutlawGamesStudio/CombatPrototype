@@ -4,7 +4,7 @@ using UnityEngine.AI;
 namespace ForgottenLegends.AI
 {
     [CreateAssetMenu(fileName = "WanderState", menuName = "AI/States/Wander")]
-    public class AiWander : AiState
+    public class AiWander : AiScriptableState
     {
         private Vector3 startingPosition;
         private Vector3 destination;

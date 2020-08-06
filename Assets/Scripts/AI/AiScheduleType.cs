@@ -24,7 +24,7 @@ namespace ForgottenLegends.AI
         /// </summary>
         [Range(0, 7)] public int dayOfWeek;
 
-        public AiState aiState;
+        public AiScriptableState aiState;
 
         public bool HasMetCondition()
         {

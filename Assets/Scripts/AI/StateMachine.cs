@@ -10,9 +10,9 @@ namespace ForgottenLegends.AI
     {
         #region Variables
         private NavMeshAgent m_NavMeshAgent = null;
-        [SerializeField] private AiState m_PreviousState = null;
-        public AiState CurrentState;
-        private AiState m_BackupState = null;
+        [SerializeField] private AiScriptableState m_PreviousState = null;
+        public AiScriptableState CurrentState;
+        private AiScriptableState m_BackupState = null;
         private NPC m_NPC = null;
         #endregion
 
@@ -21,12 +21,12 @@ namespace ForgottenLegends.AI
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
             m_NavMeshAgent.autoBraking = true;
             m_NPC = GetComponent<NPC>();
-            m_BackupState = Resources.Load<AiState>("Ai/IdleState");
+            m_BackupState = Resources.Load<AiScriptableState>("Ai/IdleState");
         }
 
-        private AiState GetActorStateByName(string stateName)
+        private AiScriptableState GetActorStateByName(string stateName)
         {
-            return Resources.Load<AiState>($"Ai/{stateName}");
+            return Resources.Load<AiScriptableState>($"Ai/{stateName}");
         }
 
         private void Update()
@@ -76,7 +76,7 @@ namespace ForgottenLegends.AI
             CurrentState.EnterState(this, Time.deltaTime);
         }
 
-        public void SetCurrentState(AiState aiState)
+        public void SetCurrentState(AiScriptableState aiState)
         {
             m_PreviousState = CurrentState;
             CurrentState = aiState;

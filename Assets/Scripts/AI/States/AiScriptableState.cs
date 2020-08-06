@@ -2,7 +2,7 @@
 
 namespace ForgottenLegends.AI
 {
-    public abstract class AiState : ScriptableObject
+    public abstract class AiScriptableState : ScriptableObject
     {
         public ExecutionState ExecutionState { get; protected set; }
 

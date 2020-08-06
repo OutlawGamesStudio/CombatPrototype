@@ -3,7 +3,7 @@
 namespace ForgottenLegends.AI
 {
     [CreateAssetMenu(fileName = "IdleState", menuName = "AI/States/Idle")]
-    public class AiWait : AiState
+    public class AiWait : AiScriptableState
     {
         public float WaitSeconds = 0;
         public float m_CurrentWaitTime = 0;
