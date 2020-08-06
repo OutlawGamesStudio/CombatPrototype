@@ -10,7 +10,7 @@ namespace ForgottenLegends.Quests
     {
         public string ObjectiveName;
         public ObjectiveType ObjectiveType;
-        public ActorData ObjectiveNPC;
+        public string ObjectiveNPC;
         // public Item ObjectiveItem;
         public Vector3 ObjectiveLocation;
         public Script ObjectiveScript;
