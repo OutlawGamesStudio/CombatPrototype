@@ -1,17 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace ForgottenLegends.AI
 {
-    [CreateAssetMenu(fileName = "WanderState", menuName = "AI/States/Wander")]
-    public class AiWander : AiScriptableState
+    [Serializable]
+    public class AiWander : AiState
     {
-        private Vector3 startingPosition;
-        private Vector3 destination;
-        private bool destinationFound = false;
-        public float destinationTolerance = 1f;
-        public float wanderDistance = 10f;
-        public int layerMask;
+        [NonSerialized] private Vector3 startingPosition;
+        [NonSerialized] private Vector3 destination;
+        [NonSerialized] private bool destinationFound = false;
+        public float DestinationTolerance = 1f;
+        public float WanderDistance = 10f;
 
         public override bool EnterState(StateMachine stateMachine, float deltaTime)
         {
@@ -25,9 +25,9 @@ namespace ForgottenLegends.AI
         {
             float distance = Vector3.Distance(m_StateMachine.transform.position, destination);
 
-            if (distance <= destinationTolerance || destinationFound == false || destination.x == Mathf.Infinity)
+            if (distance <= DestinationTolerance || destinationFound == false || destination.x == Mathf.Infinity)
             {
-                if(destination == startingPosition && distance > destinationTolerance)
+                if(destination == startingPosition && distance > DestinationTolerance)
                 {
                     return;
                 }
@@ -48,7 +48,7 @@ namespace ForgottenLegends.AI
         {
             // If the NPC is too far away from the starting position, then move back to the starting pos.
             float dist = Vector3.Distance(startingPosition, m_StateMachine.transform.position);
-            if (dist > wanderDistance)
+            if (dist > WanderDistance)
             {
                 return startingPosition;
             }
@@ -56,7 +56,7 @@ namespace ForgottenLegends.AI
             // Find a random spot on the navmesh within the specified distance.
             for (int i = 0; i < 30; i++)
             {
-                Vector3 randomPoint = Random.insideUnitSphere * distance;
+                Vector3 randomPoint = UnityEngine.Random.insideUnitSphere * distance;
                 randomPoint += startingPosition;
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))

@@ -9,7 +9,7 @@ namespace ForgottenLegends.Character
     {
         private const float BASE_HEALTH = 100f;
         public string ActorData;
-        [SerializeField] protected ActorInfo m_ActorInfo;
+        protected ActorInfo m_ActorInfo;
         public ActorInfo ActorInfo => m_ActorInfo;
 
         protected virtual void Start()

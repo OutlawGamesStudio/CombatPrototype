@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace ForgottenLegends.AI
 {
-    [CreateAssetMenu(fileName = "IdleState", menuName = "AI/States/Idle")]
-    public class AiWait : AiScriptableState
+    [Serializable]
+    public class AiWait : AiState
     {
+        [NonSerialized] protected float m_CurrentWaitTime = 0;
         public float WaitSeconds = 0;
-        public float m_CurrentWaitTime = 0;
 
-        private void Awake()
+        public AiWait()
         {
             m_CurrentWaitTime = 0;
         }

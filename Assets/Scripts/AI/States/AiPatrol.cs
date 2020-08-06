@@ -1,14 +1,15 @@
 ﻿using ForgottenLegends.Core;
+using System;
 using UnityEngine;
 
 namespace ForgottenLegends.AI
 {
-    [CreateAssetMenu(fileName = "PatrolState", menuName = "AI/States/Patrol")]
-    public class AiPatrol : AiScriptableState
+    [Serializable]
+    public class AiPatrol : AiState
     {
         public float destinationTolerance = 1f;
-        private PatrolNode m_StartingNode;
-        private PatrolNode m_CurrentNode;
+        [NonSerialized] private PatrolNode m_StartingNode;
+        [NonSerialized] private PatrolNode m_CurrentNode;
 
         public override bool EnterState(StateMachine stateMachine, float deltaTime)
         {
@@ -48,7 +49,7 @@ namespace ForgottenLegends.AI
                     m_CurrentNode = m_CurrentNode.LinkedNode;
                     return;
                 }
-                if(shouldRepeat == true)
+                if(ShouldRepeat == true)
                 {
                     m_CurrentNode = m_StartingNode;
                 }

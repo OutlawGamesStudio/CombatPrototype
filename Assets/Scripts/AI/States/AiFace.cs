@@ -1,12 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ForgottenLegends.AI
 {
-    [CreateAssetMenu(fileName = "FaceState", menuName = "AI/States/Face")]
+    [Serializable]
     public class AiFace : AiWait
     {
+        [NonSerialized] private Vector3 m_CurrentPosition;
         public Vector3 FacePosition;
-        private Vector3 m_CurrentPosition;
+
+        public AiFace() : base()
+        {
+
+        }
 
         public override bool EnterState(StateMachine stateMachine, float deltaTime)
         {

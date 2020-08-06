@@ -26,5 +26,8 @@
         "AnimationType": 2
     },
     "ActorDialogue": null,
-    "ActorState": "PatrolNPCPatrolState"
+    "ActorState": {
+        "ActorStateType": 2,
+        "ActorState": "PatrolNPCPatrolState.json"
+    }
 }

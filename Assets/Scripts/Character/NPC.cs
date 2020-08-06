@@ -28,7 +28,7 @@ namespace ForgottenLegends.Character
             {
                 if (m_StateMachine.CurrentState == null || m_StateMachine.CurrentState.GetType() != typeof(AiCombat))
                 {
-                    AiCombat aiCombat = ScriptableObject.CreateInstance<AiCombat>();
+                    AiCombat aiCombat = new AiCombat();
                     aiCombat.InitiateCombat(NPCCombat, m_ActorInfo.CharacterStats.CombatStyle, Player.Instance);
                     m_StateMachine.SetCurrentState(aiCombat);
                     return;

@@ -1,0 +1,7 @@
+{
+    "Name": "PatrolNPC Patrol State",
+    "StatePriority": 0.5,
+    "ShouldRepeat": true,
+    "ShouldReturnToPreviousState": false,
+    "DestinationTolerance": 1.0
+}

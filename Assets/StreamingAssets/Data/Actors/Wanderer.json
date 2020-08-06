@@ -26,5 +26,8 @@
         "AnimationType": 2
     },
     "ActorDialogue": null,
-    "ActorState": "WandererWanderState"
+    "ActorState": {
+        "ActorStateType": 5,
+        "ActorState": "WanderState.json"
+    }
 }

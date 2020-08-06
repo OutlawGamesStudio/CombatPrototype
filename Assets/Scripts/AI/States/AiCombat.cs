@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace ForgottenLegends.AI
 {
-    [CreateAssetMenu(fileName = "CombatState", menuName = "AI/States/Combat")]
-    public class AiCombat : AiScriptableState
+    public class AiCombat : AiState
     {
         public Actor TargetActor;
         public float destinationTolerance = 1f;
@@ -19,7 +18,7 @@ namespace ForgottenLegends.AI
             TargetActor = targetActor;
             WeaponType = weaponType;
             m_NpcCombat = npcCombat;
-            shouldReturnToPreviousState = true;
+            ShouldReturnToPreviousState = true;
         }
 
         private bool IsTargetDead()

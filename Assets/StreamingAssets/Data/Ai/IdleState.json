@@ -1,0 +1,7 @@
+{
+    "Name": "Idle State",
+    "StatePriority": 0.5,
+    "ShouldRepeat": false,
+    "ShouldReturnToPreviousState": false,
+    "WaitSeconds": 1.0
+}

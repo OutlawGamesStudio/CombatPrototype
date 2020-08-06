@@ -1,0 +1,8 @@
+{
+    "Name": "Wanderer Wander State",
+    "StatePriority": 0.5,
+    "ShouldRepeat": true,
+    "ShouldReturnToPreviousState": false,
+    "DestinationTolerance": 1.0,
+    "WanderDistance": 10.0
+}

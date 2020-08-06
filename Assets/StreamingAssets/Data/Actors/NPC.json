@@ -26,5 +26,8 @@
         "AnimationType": 2
     },
     "ActorDialogue": null,
-    "ActorState": "IdleState"
+    "ActorState": {
+        "ActorStateType": 3,
+        "ActorState": "IdleState.json"
+    }
 }

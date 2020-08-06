@@ -1,0 +1,12 @@
+{
+    "Name": "Face State",
+    "StatePriority": 0.5,
+    "ShouldRepeat": false,
+    "ShouldReturnToPreviousState": false,
+    "WaitSeconds": 1.0,
+    "FacePosition": {
+        "x": 11.0,
+        "y": 0.0,
+        "z": 15.0
+    }
+}

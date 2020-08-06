@@ -5,16 +5,15 @@ using UnityEngine;
 
 namespace ForgottenLegends.Data
 {
-    public static class ActorLoader
+    public class ActorLoader : BaseLoader
     {
         public static ActorInfo Load(string fileName)
         {
-            if(!File.Exists(fileName) || Path.GetExtension(fileName) != ".json")
+            string jsonFile = LoadFile(fileName);
+            if(jsonFile == string.Empty)
             {
                 return null;
             }
-
-            string jsonFile = File.ReadAllText(fileName);
             ActorInfo actorInfo = JsonUtility.FromJson<ActorInfo>(jsonFile);
             return actorInfo;
         }
