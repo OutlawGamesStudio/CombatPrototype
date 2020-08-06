@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+﻿using ForgottenLegends.Scripts;
+using System;
 
 namespace ForgottenLegends.Quests
 {
-    [CreateAssetMenu(fileName = "Quest", menuName = "Quests/Quest")]
-    public class Quest : ScriptableObject
+    [Serializable]
+    public struct Quest
     {
-        public QuestData QuestData;
+        public string QuestName;
+        public QuestObjective[] QuestObjectives;
+        public bool QuestCompleted;
+        public Script QuestScript;
+        public QuestType QuestType;
     }
 }
