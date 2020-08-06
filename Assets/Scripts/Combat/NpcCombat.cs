@@ -18,7 +18,7 @@ namespace ForgottenLegends.Combat
             SwingAudioSource = gameObject.AddComponent<AudioSource>();
             SwingAudioSource.loop = false;
             SwingAudioSource.playOnAwake = false;
-            if (m_NPC.ActorData.CharacterStats.CombatStyle == WeaponType.Sword)
+            if (m_NPC.ActorInfo.CharacterStats.CombatStyle == WeaponType.Sword)
             {
                 SwordCombat swordCombat = new SwordCombat(m_Animator, SwingAudioSource, this);
                 m_CombatScripts.Add(swordCombat);

@@ -44,7 +44,7 @@ namespace ForgottenLegends.Combat
             {
                 return;
             }
-            if (m_LockOnTarget != null && m_LockOnTarget.ActorData.CharacterStats.IsDead == true)
+            if (m_LockOnTarget != null && m_LockOnTarget.ActorInfo.CharacterStats.IsDead == true)
             {
                 DisableLockOn();
             }
@@ -64,7 +64,7 @@ namespace ForgottenLegends.Combat
                 foreach (var npc in npcs)
                 {
                     float dist = Vector3.Distance(npc.transform.position, m_Transform.position);
-                    if (dist < distance && npc.ActorData.CharacterStats.IsDead == false)
+                    if (dist < distance && npc.ActorInfo.CharacterStats.IsDead == false)
                     {
                         distance = dist;
                         closestNPC = npc;
@@ -72,7 +72,7 @@ namespace ForgottenLegends.Combat
                 }
                 if (closestNPC != null && m_LockOnTarget != closestNPC)
                 {
-                    if (closestNPC.ActorData.CharacterStats.IsBoss)
+                    if (closestNPC.ActorInfo.CharacterStats.IsBoss)
                     {
                         BossUI.Instance.AssignBoss(closestNPC);
                     }

@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 namespace ForgottenLegends.AI
@@ -7,9 +6,9 @@ namespace ForgottenLegends.AI
     [CreateAssetMenu(fileName = "WanderState", menuName = "AI/States/Wander")]
     public class AiWander : AiState
     {
-        [SerializeField] private Vector3 startingPosition;
-        [SerializeField] private Vector3 destination;
-        [SerializeField] private bool destinationFound = false;
+        private Vector3 startingPosition;
+        private Vector3 destination;
+        private bool destinationFound = false;
         public float destinationTolerance = 1f;
         public float wanderDistance = 10f;
         public int layerMask;

@@ -44,7 +44,7 @@ namespace ForgottenLegends.Combat
             }
             if (m_InputHandler.GetSheath())
             {
-                Player.Instance.ActorData.CharacterStats.InCombat = !Player.Instance.ActorData.CharacterStats.InCombat;
+                Player.Instance.ActorInfo.CharacterStats.InCombat = !Player.Instance.ActorInfo.CharacterStats.InCombat;
                 foreach (var combatScript in m_CombatScripts)
                 {
                     combatScript.OnWeaponSheath();

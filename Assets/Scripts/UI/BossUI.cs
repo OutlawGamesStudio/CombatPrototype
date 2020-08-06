@@ -21,8 +21,8 @@ namespace ForgottenLegends.UI
                 return;
             }
             m_BossNPC = bossNPC;
-            SetBossName(bossNPC.ActorData.CharacterStats.Name);
-            SetBossHealth(bossNPC.ActorData.CharacterStats.CurrentHealth, bossNPC.ActorData.CharacterStats.MaxHealth);
+            SetBossName(bossNPC.ActorInfo.CharacterStats.Name);
+            SetBossHealth(bossNPC.ActorInfo.CharacterStats.CurrentHealth, bossNPC.ActorInfo.CharacterStats.MaxHealth);
             m_BossUI.SetActive(true);
         }
 
@@ -32,9 +32,9 @@ namespace ForgottenLegends.UI
             {
                 return;
             }
-            if (m_BossNPC.ActorData.CharacterStats.CurrentHealth != m_BossHealth.size)
+            if (m_BossNPC.ActorInfo.CharacterStats.CurrentHealth != m_BossHealth.size)
             {
-                SetBossHealth(m_BossNPC.ActorData.CharacterStats.CurrentHealth, m_BossNPC.ActorData.CharacterStats.MaxHealth);
+                SetBossHealth(m_BossNPC.ActorInfo.CharacterStats.CurrentHealth, m_BossNPC.ActorInfo.CharacterStats.MaxHealth);
             }
         }
 

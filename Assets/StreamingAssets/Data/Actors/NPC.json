@@ -1,0 +1,30 @@
+{
+    "CharacterStats": {
+        "CharacterID": 0,
+        "Name": "NPC",
+        "IsDead": false,
+        "Level": 1,
+        "MaxHealth": 100,
+        "CurrentHealth": 100,
+        "Position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 0.0
+        },
+        "IsBoss": false,
+        "CharacterType": 0,
+        "InCombat": false,
+        "MaxMana": 100.0,
+        "CurrentMana": 100.0,
+        "CombatStyle": 0,
+        "AnimationType": 2
+    },
+    "ActorDialogue": null,
+    "ActorState": "IdleState"
+}

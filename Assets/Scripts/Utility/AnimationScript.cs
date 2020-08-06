@@ -25,7 +25,7 @@ namespace ForgottenLegends.Utility
 
         public void AssignActorCombatAnimations(Actor actor)
         {
-            string folderName = $"Combat/{actor.ActorData.CharacterStats.AnimationType}";
+            string folderName = $"Combat/{actor.ActorInfo.CharacterStats.AnimationType}";
             UnityEngine.Debug.Log("Loading actor combat animations from " + folderName);
             m_CombatAnimations = Resources.LoadAll<CombatAnimation>(folderName);
         }

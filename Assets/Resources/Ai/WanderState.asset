@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ac85d9f60d5e494492ac4bf5b6f5cbc, type: 3}
-  m_Name: EnemyWanderState
+  m_Name: WanderState
   m_EditorClassIdentifier: 
   statePriority: 0
   shouldRepeat: 0
   shouldReturnToPreviousState: 0
-  startingPosition: {x: 0.00000014301855, y: 0.11865233, z: 3.4999979}
-  destination: {x: 0.05335165, y: 0.14442548, z: 6.065688}
-  destinationFound: 1
   destinationTolerance: 1
   wanderDistance: 10
   layerMask: 0

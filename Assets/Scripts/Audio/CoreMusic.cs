@@ -31,12 +31,12 @@ namespace ForgottenLegends.Audio
             NPC nearestEnemy = null;
             foreach (var npc in npcs)
             {
-                if (npc.ActorData.CharacterStats.IsDead == true)
+                if (npc.ActorInfo.CharacterStats.IsDead == true)
                 {
                     continue;
                 }
 
-                if (npc.ActorData.CharacterStats.CharacterType != CharacterType.Enemy)
+                if (npc.ActorInfo.CharacterStats.CharacterType != CharacterType.Enemy)
                 {
                     continue;
                 }

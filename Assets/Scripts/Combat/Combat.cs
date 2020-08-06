@@ -68,7 +68,7 @@ namespace ForgottenLegends.Combat
         {
             m_SwitchWeapon.Execute();
             Sheath.Execute();
-            if (Player.Instance.ActorData.CharacterStats.InCombat == true)
+            if (Player.Instance.ActorInfo.CharacterStats.InCombat == true)
             {
                 m_LockOn.Execute();
                 m_Dodge.Execute();

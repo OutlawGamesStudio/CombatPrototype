@@ -24,9 +24,14 @@ namespace ForgottenLegends.AI
             m_BackupState = Resources.Load<AiState>("Ai/IdleState");
         }
 
+        private AiState GetActorStateByName(string stateName)
+        {
+            return Resources.Load<AiState>($"Ai/{stateName}");
+        }
+
         private void Update()
         {
-            if (m_NPC.ActorData.CharacterStats.IsDead == true)
+            if (m_NPC.ActorInfo.CharacterStats.IsDead == true)
             {
                 StopPathing();
                 return;
@@ -34,9 +39,9 @@ namespace ForgottenLegends.AI
 
             if (CurrentState == null)
             {
-                if(m_NPC.ActorData.ActorState != null)
+                if(m_NPC.ActorInfo.ActorState != null)
                 {
-                    SetCurrentState(m_NPC.ActorData.ActorState);
+                    SetCurrentState(GetActorStateByName(m_NPC.ActorInfo.ActorState));
                     return;
                 }
                 SetCurrentState(m_BackupState);

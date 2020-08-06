@@ -22,7 +22,7 @@ namespace ForgottenLegends.Combat
 
         public override void OnWeaponSheath()
         {
-            if (Player.Instance.ActorData.CharacterStats.InCombat)
+            if (Player.Instance.ActorInfo.CharacterStats.InCombat)
             {
                 Combat.AudioSource.clip = m_Unsheath;
                 m_Animator.CrossFade("Combat Withdraw Sword", 0.1f);

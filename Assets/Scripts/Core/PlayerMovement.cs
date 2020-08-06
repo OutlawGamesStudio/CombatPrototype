@@ -87,7 +87,7 @@ namespace ForgottenLegends.Core
 
         protected override void UpdateMovement()
         {
-            m_Animator.SetBool("InCombat", Player.Instance.ActorData.CharacterStats.InCombat);
+            m_Animator.SetBool("InCombat", Player.Instance.ActorInfo.CharacterStats.InCombat);
             if (CharacterMovementVelocity.x != 0.0f || CharacterMovementVelocity.y != 0.0f)
             {
                 var camRot = CameraController.Instance.transform.eulerAngles.y;

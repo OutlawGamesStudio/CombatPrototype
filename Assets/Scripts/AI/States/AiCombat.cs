@@ -24,7 +24,7 @@ namespace ForgottenLegends.AI
 
         private bool IsTargetDead()
         {
-            if (TargetActor.ActorData.CharacterStats.CurrentHealth <= 0 || TargetActor.ActorData.CharacterStats.IsDead == true)
+            if (TargetActor.ActorInfo.CharacterStats.CurrentHealth <= 0 || TargetActor.ActorInfo.CharacterStats.IsDead == true)
             {
                 return true;
             }

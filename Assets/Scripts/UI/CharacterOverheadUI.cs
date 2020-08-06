@@ -38,7 +38,7 @@ namespace ForgottenLegends.UI
 
         private void EnableHealthIfAble()
         {
-            if (m_NPC.ActorData.CharacterStats.CurrentHealth <= 0 || Vector3.Distance(m_Player.transform.position, transform.position) > 10f)
+            if (m_NPC.ActorInfo.CharacterStats.CurrentHealth <= 0 || Vector3.Distance(m_Player.transform.position, transform.position) > 10f)
             {
                 m_OverheadUI.SetActive(false);
             }
@@ -54,12 +54,12 @@ namespace ForgottenLegends.UI
 
         private void UpdateName()
         {
-            m_CharacterName.text = m_NPC.ActorData.CharacterStats.Name;
+            m_CharacterName.text = m_NPC.ActorInfo.CharacterStats.Name;
         }
 
         private void UpdateHealth()
         {
-            m_HealthBar.size = m_NPC.ActorData.CharacterStats.CurrentHealth / m_NPC.ActorData.CharacterStats.MaxHealth;
+            m_HealthBar.size = m_NPC.ActorInfo.CharacterStats.CurrentHealth / m_NPC.ActorInfo.CharacterStats.MaxHealth;
         }
 
         private void FaceCamera()

@@ -15,8 +15,8 @@
 
         protected override void Update()
         {
-            ActorData.CharacterStats.Position = transform.position;
-            ActorData.CharacterStats.Rotation = transform.rotation;
+            m_ActorInfo.CharacterStats.Position = transform.position;
+            m_ActorInfo.CharacterStats.Rotation = transform.rotation;
         }
     }
 }

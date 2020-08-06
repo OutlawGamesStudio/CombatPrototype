@@ -32,21 +32,30 @@ namespace ForgottenLegends.Dialogue
             ShowDialogueUI(false);
         }
 
+        private ActorDialogue GetActorDialogueByName(string npcName, string name)
+        {
+            return Resources.Load<ActorDialogue>($"Dialogue/{npcName}/{name}");
+        }
+
         private void Update()
         {
             NPC npc = ClosestNPC();
             if (m_InputHandler.GetActivate() && ClosestNPC() != null && m_DialogueChoicesShownTime <= 0)
             {
-                if (npc.ActorData.ActorDialogue != null && npc.ActorData.ActorDialogue.Dialogues.Length > 0)
+                if (npc.ActorInfo.ActorDialogue != null && npc.ActorInfo.ActorDialogue == string.Empty)
                 {
-                    for (int i = 0; i < npc.ActorData.ActorDialogue.Dialogues.Length; i++)
+                    ActorDialogue actorDialogue = GetActorDialogueByName(npc.ActorInfo.CharacterStats.Name, npc.ActorInfo.ActorDialogue);
+                    if (actorDialogue != null && actorDialogue.Dialogues.Length > 0)
                     {
-                        CreateDialogueChoice(npc.ActorData.ActorDialogue.Dialogues[i]);
+                        for (int i = 0; i < actorDialogue.Dialogues.Length; i++)
+                        {
+                            CreateDialogueChoice(actorDialogue.Dialogues[i]);
+                        }
+                        ShowDialogueUI(true);
+                        SetDialogueText(actorDialogue.StartingDialogue.DialogueText);
+                        m_DialogueChoicesShownTime = 1f;
+                        return;
                     }
-                    ShowDialogueUI(true);
-                    SetDialogueText(npc.ActorData.ActorDialogue.StartingDialogue.DialogueText);
-                    m_DialogueChoicesShownTime = 1f;
-                    return;
                 }
             }
             if (m_DialogueChoicesShownTime > 0)

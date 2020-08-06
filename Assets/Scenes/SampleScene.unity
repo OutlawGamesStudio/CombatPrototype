@@ -246,7 +246,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3dd858a97bcd408fb39ede5ea5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorData: {fileID: 11400000, guid: c073250e1d2676b4da482af49026173e, type: 2}
+  ActorData: Wanderer.json
+  m_ActorInfo:
+    CharacterStats:
+      CharacterID: 0
+      Name: 
+      IsDead: 0
+      Level: 0
+      MaxHealth: 0
+      CurrentHealth: 0
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0, w: 0}
+      IsBoss: 0
+      CharacterType: 0
+      InCombat: 0
+      MaxMana: 0
+      CurrentMana: 0
+      CombatStyle: 0
+      AnimationType: 0
+    ActorDialogue: 
+    ActorState: 
 --- !u!195 &21208531
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2711,7 +2730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &285622708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2752,7 +2771,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3dd858a97bcd408fb39ede5ea5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorData: {fileID: 0}
+  ActorData: Boss.json
+  m_ActorInfo:
+    CharacterStats:
+      CharacterID: 0
+      Name: 
+      IsDead: 0
+      Level: 0
+      MaxHealth: 0
+      CurrentHealth: 0
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0, w: 0}
+      IsBoss: 0
+      CharacterType: 0
+      InCombat: 0
+      MaxMana: 0
+      CurrentMana: 0
+      CombatStyle: 0
+      AnimationType: 0
+    ActorDialogue: 
+    ActorState: 
 --- !u!195 &285622711
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5429,7 +5467,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3dd858a97bcd408fb39ede5ea5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorData: {fileID: 11400000, guid: 14d8bc329734c6b40a4d112be32d9cc2, type: 2}
+  ActorData: NPC.json
+  m_ActorInfo:
+    CharacterStats:
+      CharacterID: 0
+      Name: 
+      IsDead: 0
+      Level: 0
+      MaxHealth: 0
+      CurrentHealth: 0
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0, w: 0}
+      IsBoss: 0
+      CharacterType: 0
+      InCombat: 0
+      MaxMana: 0
+      CurrentMana: 0
+      CombatStyle: 0
+      AnimationType: 0
+    ActorDialogue: 
+    ActorState: 
 --- !u!195 &542805286
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5978,7 +6035,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3dd858a97bcd408fb39ede5ea5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorData: {fileID: 11400000, guid: 779ea492bbba87a4b8f611cb4a388f10, type: 2}
+  ActorData: Enemy.json
+  m_ActorInfo:
+    CharacterStats:
+      CharacterID: 0
+      Name: 
+      IsDead: 0
+      Level: 0
+      MaxHealth: 0
+      CurrentHealth: 0
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0, w: 0}
+      IsBoss: 0
+      CharacterType: 0
+      InCombat: 0
+      MaxMana: 0
+      CurrentMana: 0
+      CombatStyle: 0
+      AnimationType: 0
+    ActorDialogue: 
+    ActorState: 
 --- !u!114 &602577824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13355,7 +13431,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf3dd858a97bcd408fb39ede5ea5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorData: {fileID: 11400000, guid: c463f7c207d1b7b46abf58f2788a1547, type: 2}
+  ActorData: PatrolNPC.json
+  m_ActorInfo:
+    CharacterStats:
+      CharacterID: 0
+      Name: 
+      IsDead: 0
+      Level: 0
+      MaxHealth: 0
+      CurrentHealth: 0
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0, w: 0}
+      IsBoss: 0
+      CharacterType: 0
+      InCombat: 0
+      MaxMana: 0
+      CurrentMana: 0
+      CombatStyle: 0
+      AnimationType: 0
+    ActorDialogue: 
+    ActorState: 
 --- !u!195 &1596486446
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -18207,7 +18302,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bfa824b8e9a45439bd3dd2cc74011e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActorData: {fileID: 11400000, guid: 41b1e862f781a5f47bf299aa7313231a, type: 2}
+  ActorData: Player.json
+  m_ActorInfo:
+    CharacterStats:
+      CharacterID: 0
+      Name: 
+      IsDead: 0
+      Level: 0
+      MaxHealth: 0
+      CurrentHealth: 0
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0, w: 0}
+      IsBoss: 0
+      CharacterType: 0
+      InCombat: 0
+      MaxMana: 0
+      CurrentMana: 0
+      CombatStyle: 0
+      AnimationType: 0
+    ActorDialogue: 
+    ActorState: 
 --- !u!4 &1031632035039575624
 Transform:
   m_ObjectHideFlags: 0
