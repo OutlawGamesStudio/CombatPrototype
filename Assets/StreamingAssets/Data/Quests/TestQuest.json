@@ -1,0 +1,44 @@
+{
+    "QuestName": "Test Quest",
+    "QuestObjectives": [
+        {
+            "ObjectiveName": "Go forward",
+            "ObjectiveType": 2,
+            "ObjectiveNPC": null,
+            "ObjectiveItem": null,
+            "ObjectiveLocation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 3.5
+            }
+        },
+        {
+            "ObjectiveName": "Kill enemy",
+            "ObjectiveType": 0,
+            "ObjectiveNPC": "Enemy",
+            "ObjectiveItem": null,
+            "ObjectiveLocation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "ObjectiveName": "Talk to NPC",
+            "ObjectiveType": 3,
+            "ObjectiveNPC": "NPC",
+            "ObjectiveItem": null,
+            "ObjectiveLocation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    ],
+    "QuestCompleted": false,
+    "QuestScript": {
+        "scriptName": "TestQuest",
+        "scriptPath": "Scripts/TestQuest.lua"
+    },
+    "QuestType": 0
+}

@@ -1,6 +1,4 @@
-﻿using ForgottenLegends.Character;
-using ForgottenLegends.Scripts;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace ForgottenLegends.Quests
@@ -11,8 +9,7 @@ namespace ForgottenLegends.Quests
         public string ObjectiveName;
         public ObjectiveType ObjectiveType;
         public string ObjectiveNPC;
-        // public Item ObjectiveItem;
+        public string ObjectiveItem;
         public Vector3 ObjectiveLocation;
-        public Script ObjectiveScript;
     }
 }
